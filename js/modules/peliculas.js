@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Query } from "./query.js";
 
 export class Movies extends Query {
@@ -27,6 +28,27 @@ export class Movies extends Query {
         this.setCollection = "pelicula"
         let query = await this.collection.find({estado: "en cartelera"}).toArray()
         return query
+
+    }
+
+    /**
+     * * API para obtener los detalles de una pelicula especifica
+     * TODO: se listan los detalles de una pelicula especifica
+     * "66a80379a5aad36c22a20c80"
+     * @param {String} codigo id de la pelicula a buscar
+     * @returns {Object} {mensaje, ?data}
+     */
+    async showMovieDetailsById(id) {
+
+        this.setCollection = "pelicula";
+        try {
+
+            let query = await this.collection.findOne({_id: ObjectId.createFromHexString(id)})
+            return query
+
+        } catch (e) {
+            return {error: "El id ingresado es invalido, recuerde que debe ser un ObjectId existente"}
+        }
 
     }
 
