@@ -1,4 +1,4 @@
-import { Connection } from "../../helpers/db/connection";
+import { Connection } from "../../helpers/db/connection.js";
 
 export class Query extends Connection {
 

@@ -1,4 +1,4 @@
-import { Query } from "./query";
+import { Query } from "./query.js";
 
 export class Entries extends Query {
 
