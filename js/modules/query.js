@@ -19,8 +19,13 @@ export class Query extends Connection {
     }
 
     async findOne(id) {
+        try {
+            
+            return await this.collection.findOne({ _id: id });
 
-        return await this.collection.findOne({ _id: id });
+        } catch (e) {
+            return 0
+        }
 
     }
 

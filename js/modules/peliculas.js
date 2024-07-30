@@ -34,7 +34,8 @@ export class Movies extends Query {
     /**
      * * API para obtener los detalles de una pelicula especifica
      * TODO: se listan los detalles de una pelicula especifica
-     * "66a80379a5aad36c22a20c80"
+     * ? "66a80379a5aad36c22a20c80"
+     * 
      * @param {String} codigo id de la pelicula a buscar
      * @returns {Object} {mensaje, ?data}
      */
