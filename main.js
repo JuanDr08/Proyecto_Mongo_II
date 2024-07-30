@@ -22,3 +22,10 @@ console.log(await boletos.buyEntriesToAFunction(obj)) */
 /* 
 let boletos = new m.Entries()
 console.log(await boletos.seatsDisponibility("66a807cca5aad36c22a20ca3")) */
+
+/* let boletos = new m.Entries()
+let obj = {
+    funcion_id: "66a807cca5aad36c22a20ca3",
+    seatCode: "A1"
+}
+console.log( await boletos.reserveSeats(obj)) */
