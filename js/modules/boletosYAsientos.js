@@ -67,4 +67,28 @@ export class Entries extends Query {
 
     }
 
+    /**
+     * * API para listar los asientos disponibles para cierta funcion
+     * TODO: listar los asientos disponibles en una funcion especifica
+     * ? "66a807cca5aad36c22a20ca3" arg
+     * 
+     * @param {String} arg - Codigo de la funcion la cual se desea verificar la disponibilidad
+     * @returns {Object} {mensaje, ?data}
+     */
+    async seatsDisponibility(arg) {
+
+        try {
+            
+            this.setCollection = "funcion"
+            let funcion = await this.findOne(ObjectId.createFromHexString(arg))
+            let {asientos} = funcion;
+
+            return asientos
+
+        } catch (error) {
+            return {Error: 'El id de la funcion que ha ingresado no existe', status: "404"}
+        }
+
+    }
+
 }

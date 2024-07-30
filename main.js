@@ -8,7 +8,7 @@ console.log(await hola.showAllCurrentMovies()) */
 
 console.log(await pelicula.showMovieDetailsById("66a80379a5aad36c22a20c8g")) */
 
-let boletos = new m.Entries()
+/* let boletos = new m.Entries()
 
 
 let obj = {
@@ -18,4 +18,7 @@ let obj = {
     fechaCompra: new Date(),
 }
 
-console.log(await boletos.buyEntriesToAFunction(obj))
+console.log(await boletos.buyEntriesToAFunction(obj)) */
+/* 
+let boletos = new m.Entries()
+console.log(await boletos.seatsDisponibility("66a807cca5aad36c22a20ca3")) */
