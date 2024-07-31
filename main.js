@@ -52,3 +52,13 @@ console.log(await user.createNewUser(obj)) */
 /* let user = new m.Users()
 
 console.log(await user.getUserDetails(987654321)) */
+
+
+
+/* let user = new m.Users()
+let obj = {
+    cedula: 1021513601,
+    tarjeta: true
+}
+
+console.log(await user.updateUserRole(obj)) */

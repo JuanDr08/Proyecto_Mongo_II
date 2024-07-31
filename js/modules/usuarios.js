@@ -17,6 +17,17 @@ export class Users extends Query {
         
     }
 
+    /**
+     * * API para crear usuarios tanto a nivel de coleccion como de sistema
+     * TODO: permitir la creacion de usuarios a nivel de coleccion y Base de datos
+     * ? {Nombre: "Juan David", Nick: "JDRO", contrasenia: 1021513601, email: "prueba@gmail.com", telefono: 3222352673}
+     * @param {String} Nombre - Nombre del usuario a crear
+     * @param {String} Nick - Nombre distintivo del usuario
+     * @param {Int} contrasenia - Contraseña del usuario
+     * @param {String} email - Correo del usuario
+     * @param {Int} telefono - Telefoo del usuario
+     * @returns {Object} - {mensaje, ?data}
+     */
     async createNewUser(arg) {
 
         try {
@@ -69,6 +80,43 @@ export class Users extends Query {
             return error
         }
 
+    }
+
+    /**
+     * * API para actualizar el rol de un usuario, ya sea de vip a estandar o de estandar a vip
+     * TODO: Actualizar el rol de un usuario existente
+     * ? {cedula: 1021513601, tarjeta: true}
+     * 
+     * @param {Int} cedula - Codigo identificador o cedula del usuario al que se le desea modificar el rol 
+     * @param {Boolean} tarjeta - Indicador del tipo de modificacion que se desea hacer, Vip-Estadar o Estandar-Vip
+     * @returns {Object} - {mensaje, ?data}
+     */
+    async updateUserRole(arg) {
+        try {
+            this.setCollection = "usuario"
+            let validateUser = await this.collection.findOne({_id: arg.cedula})
+            if(!validateUser) throw {Error: 'El usuario que ha ingresado no existe', status: "404"}
+            
+            if(arg.tarjeta) {
+                await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {fechaVencimiento: new Date(), estado: "activa"} }})
+
+                let query = await this.db.command({
+                    updateUser: validateUser.Nick,
+                    roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
+                })
+                return {ActualizaciónExitosa: "Rol del usuario actualizado", usuario: query}
+            }
+
+            await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {estado: "inactiva"} }})
+            let query = await this.db.command({
+                updateUser: validateUser.Nick,
+                roles: [{ role: "UsuarioEstandar", db: process.env.DB_NAME }]
+            })
+            return {ActualizaciónExitosa: "Rol del usuario actualizado", usuario: query}
+
+        } catch (error) {
+            return error.errorResponse
+        }
     }
 
 }
