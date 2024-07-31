@@ -50,10 +50,13 @@ export class Entries extends Query {
             this.setCollection = "sala"
             let sala = await this.findOne(arg.id_sala)
             if (arg.asiento.includes(sala.filaVip)) total += total * 0.97;
-            if (Vip.validateCard(arg.cedula_user)) total = total * 0.80;
+
+            this.setCollection = "usuario"
+            let validCard = await this.collection.findOne({_id: arg.cedula_user, tarjeta: {$exists: true}, "tarjeta.estado": "activa"})
+            if (validCard) total = total * 0.80
             
             arg.Total = total
-            
+            arg.id_funcion = ObjectId.createFromHexString(arg.id_funcion)
             this.setCollection = "boleto"
             let query = await this.collection.insertOne(arg)
 
