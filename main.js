@@ -12,7 +12,7 @@ console.log(await pelicula.showMovieDetailsById("66a80379a5aad36c22a20c80")) */
 
 
 let obj = {
-    cedula_user: 1234567890,
+    cedula_user: 1021513601,
     id_funcion: "66a807cca5aad36c22a20ca3",
     asiento: "A1",
     fechaCompra: new Date(),
@@ -34,7 +34,7 @@ console.log( await boletos.reserveSeats(obj)) */
 /* let boletos = new m.Entries()
 let obj = {
     funcion_id: "66a807cca5aad36c22a20ca3",
-    seatCode: "A2"
+    seatCode: "A1"
 }
 console.log(await boletos.cancelBooking(obj)) */
 

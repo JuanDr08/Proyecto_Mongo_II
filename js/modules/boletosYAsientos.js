@@ -30,8 +30,6 @@ export class Entries extends Query {
 
         try {
             
-            this.setCollection = "usuario"
-            if (!( await this.findOne(arg.cedula_user))) throw {Error: "La cedula del usuario es incorrecta o inexistente", status: "401"}
 
             this.setCollection = "funcion"
             let funcion = await this.findOne(ObjectId.createFromHexString(arg.id_funcion))
@@ -39,22 +37,23 @@ export class Entries extends Query {
             arg.id_sala = funcion.id_sala;
 
             let {asientos} = funcion
-            let disponible = asientos.filter(obj => obj.codigo == arg.asiento && obj.estado == "disponible")
+            let disponible = asientos.filter(obj => obj.codigo == arg.asiento.toUpperCase() && obj.estado == "disponible")
             if (!disponible.length) throw {Error: 'El asiento ingresado ya esta reservado o no existe', status: "409 ", asientosSala: asientos}
             
             arg.subTotal = 14000
             let total = arg.subTotal
 
-            this.collection.updateOne({_id: ObjectId.createFromHexString(arg.id_funcion), "asientos.codigo": arg.asiento}, {$set: {"asientos.$.estado": "comprada"}})
+            this.collection.updateOne({_id: ObjectId.createFromHexString(arg.id_funcion), "asientos.codigo": arg.asiento.toUpperCase()}, {$set: {"asientos.$.estado": "comprada"}})
 
             this.setCollection = "sala"
             let sala = await this.findOne(arg.id_sala)
-            if (arg.asiento.includes(sala.filaVip)) total += total * 0.97;
+            if (arg.asiento.toUpperCase().includes(sala.filaVip)) total += total * 0.97;
 
             this.setCollection = "usuario"
             let validCard = await this.collection.findOne({_id: arg.cedula_user, tarjeta: {$exists: true}, "tarjeta.estado": "activa"})
             if (validCard) total = total * 0.80
             
+            arg.cedula_user = process.env.PASSWORD
             arg.Total = total
             arg.id_funcion = ObjectId.createFromHexString(arg.id_funcion)
             this.setCollection = "boleto"
@@ -117,7 +116,7 @@ export class Entries extends Query {
             let [{estado}] = disponibilidad;
             if (estado != "disponible") throw {Error: 'El asiento que desea reservar no esta disponible actualmente, escoja otro', status: "409", asientos: asientos}
 
-            let query = await this.collection.updateOne({_id: ObjectId.createFromHexString(arg.funcion_id), "asientos.codigo": arg.seatCode}, {$set: {"asientos.$.estado": "reservada"}})
+            let query = await this.collection.updateOne({_id: ObjectId.createFromHexString(arg.funcion_id), "asientos.codigo": arg.seatCode.toUpperCase()}, {$set: {"asientos.$.estado": "reservada"}})
             return query
             
         } catch (error) {
@@ -143,12 +142,12 @@ export class Entries extends Query {
             if (!funcion) throw {Error: 'El id de la funcion ingresada no existe', status: "404"}
 
             let {asientos} = funcion;
-            let existe = asientos.filter(obj => obj.codigo == arg.seatCode);
+            let existe = asientos.filter(obj => obj.codigo == arg.seatCode.toUpperCase());
             if (!existe.length) throw {Error: 'El asiento ingresado no existe', status: "404 ", asientosSala: asientos};
             let [{estado}] = existe;
             if (estado != "reservada") throw {Error: 'El asiento existe, pero su estado no esta reservado, por lo que no hay nada que cancelar', status: 400, asientos: asientos}
 
-            let query = await this.collection.updateOne({_id: ObjectId.createFromHexString(arg.funcion_id), "asientos.codigo": arg.seatCode}, {$set: {"asientos.$.estado": "disponible"}})
+            let query = await this.collection.updateOne({_id: ObjectId.createFromHexString(arg.funcion_id), "asientos.codigo": arg.seatCode.toUpperCase()}, {$set: {"asientos.$.estado": "disponible"}})
 
             return query
 

@@ -47,7 +47,7 @@ export class Users extends Query {
             return {CreacionExitosa: "Usuario creado con rol estandar", usuario: query, cliente: insercion}
 
         } catch (error) {
-            if (error.code == 13 || error.code == 121) return error.errorResponse
+            if (error.code == 13 || error.code == 121 || error.code == 11000) return error.errorResponse
             return error
         }
 
@@ -66,7 +66,7 @@ export class Users extends Query {
         try {
             
             this.setCollection = "usuario"
-            let user = await this.findOne(arg)
+            let user = await this.collection.findOne({_id : arg})
             if (!user) throw {Error: 'El usuario que ha ingresado no existe', status: "404"}
             let {users: [rol]} = await this.db.command({
                 usersInfo: {
