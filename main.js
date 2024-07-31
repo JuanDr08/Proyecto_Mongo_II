@@ -6,7 +6,7 @@ console.log(await hola.showAllCurrentMovies()) */
 
 /* let pelicula = new m.Movies();
 
-console.log(await pelicula.showMovieDetailsById("66a80379a5aad36c22a20c8g")) */
+console.log(await pelicula.showMovieDetailsById("66a80379a5aad36c22a20c80")) */
 
 /* let boletos = new m.Entries()
 
@@ -62,3 +62,7 @@ let obj = {
 }
 
 console.log(await user.updateUserRole(obj)) */
+
+/* let user = new m.Users()
+
+console.log(await user.showAllUsers("vip")) */

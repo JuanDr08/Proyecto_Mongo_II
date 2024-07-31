@@ -47,7 +47,8 @@ export class Users extends Query {
             return {CreacionExitosa: "Usuario creado con rol estandar", usuario: query, cliente: insercion}
 
         } catch (error) {
-            return error.errorResponse
+            if (error.code == 13 || error.code == 121) return error.errorResponse
+            return error
         }
 
     }
@@ -77,6 +78,7 @@ export class Users extends Query {
             return {Usuario: user, roles: rol.roles}
 
         } catch (error) {
+            if (error.code == 13 || error.code == 121) return error.errorResponse
             return error
         }
 
@@ -115,7 +117,40 @@ export class Users extends Query {
             return {ActualizaciónExitosa: "Rol del usuario actualizado", usuario: query}
 
         } catch (error) {
-            return error.errorResponse
+            if (error.code == 13 || error.code == 121) return error.errorResponse
+            return error
+        }
+    }
+
+    /**
+     * * API que permite listar los usuarios existentes del sistema y permite aplicar filtros por roles
+     * TODO: listar a los usuarios del sistema y permitir la aplicacion de filtros
+     * ? "vip" | "estandar" | "admin" | ""
+     * @param {String} arg - String que debe indicar el filtro que se desea hacer, los posibles son (VIP, ESTANDAR O ADMIN)
+     * @returns {Object} - {mensaje, ?data}
+     */
+    async showAllUsers(arg = "") {
+        try {
+
+            this.setCollection = "usuario"
+            
+            if (arg.toUpperCase() == "VIP") {
+                let query = await this.collection.find({tarjeta: {$exists: true}, "tarjeta.estado": "activa"}).toArray()
+                return query
+            } else if(arg.toUpperCase() == "ESTANDAR") {
+                let query = await this.collection.find({$or: [{tarjeta: {$exists: false}}, {"tarjeta.estado": "inactiva"}]}).toArray()
+                return query
+            } else if(arg.toUpperCase() == "ADMIN") {
+                let query = await this.collection.find({Nombre: "Admin"}).toArray()
+                return query
+            }else {
+                let query = await this.collection.find({}).toArray()
+                return query
+            }
+
+        } catch (error) {
+            if (error.code == 13 || error.code == 121) return error.errorResponse
+            return error
         }
     }
 
