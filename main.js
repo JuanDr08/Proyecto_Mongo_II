@@ -47,3 +47,8 @@ let obj = {
     telefono: 3222352673
 }
 console.log(await user.createNewUser(obj)) */
+
+
+/* let user = new m.Users()
+
+console.log(await user.getUserDetails(987654321)) */
