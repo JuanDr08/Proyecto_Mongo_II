@@ -21,7 +21,7 @@ export class Entries extends Query {
     /**
      * * API para permitir la compra de boletas
      * TODO: Se realiza el registro del boleto en la base de datos
-     * ? {cedula_user: 1234567890, id_funcion: "66a807cca5aad36c22a20ca3", "A1", fechaCompra: new Date()} arg
+     * ? {id_funcion: "66a807cca5aad36c22a20ca3", "A1", fechaCompra: new Date()} arg
      * 
      * @param {Object} arg - Objeto que contiene los datos necesarios de la boleta
      * @returns {Object} {mensaje, ?data}
@@ -50,11 +50,11 @@ export class Entries extends Query {
             if (arg.asiento.toUpperCase().includes(sala.filaVip)) total += total * 0.97;
 
             this.setCollection = "usuario"
-            let validCard = await this.collection.findOne({_id: arg.cedula_user, tarjeta: {$exists: true}, "tarjeta.estado": "activa"})
+            let validCard = await this.collection.findOne({_id: Number(process.env.PASSWORD), tarjeta: {$exists: true}, "tarjeta.estado": "activa"})
             if (validCard) total = total * 0.80
             
-            arg.cedula_user = process.env.PASSWORD
             arg.Total = total
+            arg.cedula_user = Number(process.env.PASSWORD)
             arg.id_funcion = ObjectId.createFromHexString(arg.id_funcion)
             this.setCollection = "boleto"
             let query = await this.collection.insertOne(arg)

@@ -103,16 +103,24 @@ export class Users extends Query {
                 await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {fechaVencimiento: new Date(), estado: "activa"} }})
 
                 let query = await this.db.command({
-                    updateUser: validateUser.Nick,
+                    grantRolesToUser: validateUser.Nick,
                     roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
+                })
+                await this.db.command({
+                    revokeRolesFromUser: validateUser.Nick,
+                    roles: [{ role: "UsuarioEstandar", db: process.env.DB_NAME }]
                 })
                 return {ActualizaciónExitosa: "Rol del usuario actualizado", usuario: query}
             }
 
             await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {estado: "inactiva"} }})
             let query = await this.db.command({
-                updateUser: validateUser.Nick,
+                grantRolesToUser: validateUser.Nick,
                 roles: [{ role: "UsuarioEstandar", db: process.env.DB_NAME }]
+            })
+            await this.db.command({
+                revokeRolesFromUser: validateUser.Nick,
+                roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
             })
             return {ActualizaciónExitosa: "Rol del usuario actualizado", usuario: query}
 
