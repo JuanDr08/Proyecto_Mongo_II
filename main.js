@@ -37,3 +37,13 @@ let obj = {
     seatCode: "A2"
 }
 console.log(await boletos.cancelBooking(obj)) */
+
+/* let user = new m.Users()
+let obj = {
+    Nombre: "Juan David",
+    Nick: "JDRO",
+    contrasenia: 1021513601,
+    email: "prueba@gmail.com",
+    telefono: 3222352673
+}
+console.log(await user.createNewUser(obj)) */

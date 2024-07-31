@@ -4,8 +4,12 @@ import {
 import {
     Entries
 } from './modules/boletosYAsientos.js'
+import {
+    Users
+} from './modules/usuarios.js'
 
 export {
     Movies,
-    Entries
+    Entries,
+    Users
 }
