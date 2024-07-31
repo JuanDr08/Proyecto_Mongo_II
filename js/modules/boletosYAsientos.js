@@ -123,4 +123,36 @@ export class Entries extends Query {
 
     }
 
+    /**
+     * * API para cancelar reservas de asientos
+     * TODO: permitir la cancelacion de asientos reservados
+     * ? {uncion_id: "66a807cca5aad36c22a20ca3", seatCode: "A2"}
+     * 
+     * @param {Object} arg - Objeto contiene los datos requeridos para cancelar una reserva
+     * @returns {Object} {mensaje, ?data}
+     */
+    async cancelBooking (arg) {
+
+        try {
+            
+            this.setCollection = "funcion"
+            let funcion = await this.findOne(ObjectId.createFromHexString(arg.funcion_id))
+            if (!funcion) throw {Error: 'El id de la funcion ingresada no existe', status: "404"}
+
+            let {asientos} = funcion;
+            let existe = asientos.filter(obj => obj.codigo == arg.seatCode);
+            if (!existe.length) throw {Error: 'El asiento ingresado no existe', status: "404 ", asientosSala: asientos};
+            let [{estado}] = existe;
+            if (estado != "reservada") throw {Error: 'El asiento existe, pero su estado no esta reservado, por lo que no hay nada que cancelar', status: 400, asientos: asientos}
+
+            let query = await this.collection.updateOne({_id: ObjectId.createFromHexString(arg.funcion_id), "asientos.codigo": arg.seatCode}, {$set: {"asientos.$.estado": "disponible"}})
+
+            return query
+
+        } catch (error) {
+            return error
+        }
+
+    }
+
 }

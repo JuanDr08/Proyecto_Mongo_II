@@ -29,3 +29,11 @@ let obj = {
     seatCode: "A1"
 }
 console.log( await boletos.reserveSeats(obj)) */
+
+
+/* let boletos = new m.Entries()
+let obj = {
+    funcion_id: "66a807cca5aad36c22a20ca3",
+    seatCode: "A2"
+}
+console.log(await boletos.cancelBooking(obj)) */
