@@ -1,20 +1,21 @@
-import { ObjectId } from "mongodb";
-import { Query } from "./query.js";
+const { ObjectId } = require('mongodb');
+const Query = require('./query');
 
-export class Users extends Query {
+module.exports = class Users extends Query {
 
     static instance
 
     constructor() {
+        super()
+    }
+
+    static get getInstance() {
 
         if (Users.instance === "object") return Users.instance
 
-        super()
+        Users.instance = new Users();
+        return this;
 
-        Users.instance = this
-
-        return this
-        
     }
 
     /**

@@ -1,19 +1,17 @@
-import { Connection } from "../../helpers/db/connection.js";
+const Connection = require('../database');
 
-export class Query extends Connection {
+module.exports = class Query extends Connection {
 
     static instance
 
     constructor() {
-
-        if (Query.instance === "object") {
-
-            return Query.instance
-
-        }
         super()
+    }
 
-        Query.instance = this
+    static get getInstance() {
+
+        if (Query.instance === "object") return Query.instance;
+        Query.instance = new Query();
         return this;
 
     }

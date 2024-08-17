@@ -1,21 +1,19 @@
-import { ObjectId } from "mongodb";
-import { Query } from "./query.js";
-import { Vip } from "./tarjetaVIP.js";
+const { ObjectId } = require('mongodb');
+const Query = require("./query");
 
-export class Entries extends Query {
+module.exports = class Entries extends Query {
 
     static instance
 
     constructor() {
+        super()
+    }
+
+    static get getInstance() {
 
         if (Entries.instance === "object") return Entries.instance
-
-        super()
-
-        Entries.instance = this
-
-        return this
-        
+        Entries.instance = new Entries();
+        return this;
     }
 
     /**
