@@ -1,9 +1,19 @@
-const Movies = require('./controllers/peliculas');
+const {
+    listAllMovies,
+    getMovieByID
+} = require('./controllers/moviesController');
 const Entries = require('./controllers/boletosYAsientos');
 const Users = require('./controllers/usuarios');
+const {
+    emptyBodyForGetRequestsValidation,
+    objectIdValidator
+} = require('./validators/generalValidators')
 
 module.exports = {
-    Movies,
+    listAllMovies,
+    getMovieByID,
     Entries,
-    Users
+    Users,
+    emptyBodyForGetRequestsValidation,
+    objectIdValidator
 }

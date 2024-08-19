@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
-const Query = require("./query");
+const Connection = require("../database");
 
-module.exports = class Entries extends Query {
+module.exports = class Entries extends Connection {
 
     static instance
 
@@ -30,7 +30,7 @@ module.exports = class Entries extends Query {
             
 
             this.setCollection = "funcion"
-            let funcion = await this.findOne(ObjectId.createFromHexString(arg.id_funcion))
+            let funcion = await this.collection.findOne({_id : ObjectId.createFromHexString(arg.id_funcion)})
             if(!funcion) throw {Error: "La funcion ingresada no existe", status: "404"}
             arg.id_sala = funcion.id_sala;
 
@@ -44,7 +44,7 @@ module.exports = class Entries extends Query {
             this.collection.updateOne({_id: ObjectId.createFromHexString(arg.id_funcion), "asientos.codigo": arg.asiento.toUpperCase()}, {$set: {"asientos.$.estado": "comprada"}})
 
             this.setCollection = "sala"
-            let sala = await this.findOne(arg.id_sala)
+            let sala = await this.collection.findOne({ _id : arg.id_sala})
             if (arg.asiento.toUpperCase().includes(sala.filaVip)) total += total * 0.97;
 
             this.setCollection = "usuario"
@@ -80,7 +80,7 @@ module.exports = class Entries extends Query {
         try {
             
             this.setCollection = "funcion"
-            let funcion = await this.findOne(ObjectId.createFromHexString(arg))
+            let funcion = await this.collection.findOne({ _id : ObjectId.createFromHexString(arg)})
             let {asientos} = funcion;
 
             return asientos
@@ -105,7 +105,7 @@ module.exports = class Entries extends Query {
         try {
             
             this.setCollection = "funcion"
-            let funcion = await this.findOne(ObjectId.createFromHexString(arg.funcion_id))
+            let funcion = await this.collection.findOne({_id : ObjectId.createFromHexString(arg.funcion_id)})
             if (!funcion) throw {Error: 'El id de la funcion ingresada no existe', status: "404"}
             
             let {asientos} = funcion;
@@ -136,7 +136,7 @@ module.exports = class Entries extends Query {
         try {
             
             this.setCollection = "funcion"
-            let funcion = await this.findOne(ObjectId.createFromHexString(arg.funcion_id))
+            let funcion = await this.collection.findOne({ _id : ObjectId.createFromHexString(arg.funcion_id) })
             if (!funcion) throw {Error: 'El id de la funcion ingresada no existe', status: "404"}
 
             let {asientos} = funcion;

@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
-const Query = require('./query');
+const Connection = require('../database');
 
-module.exports = class Users extends Query {
+module.exports = class Users extends Connection {
 
     static instance
 

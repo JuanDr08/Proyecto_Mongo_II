@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Sistema gestor de peliculas, usuarios, roles y compras impulsado con base de datos MongoDB y NodeJs",
   "main": "app.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "start": "node --watch --env-file=.env app.js"
+    "start": "node --watch --env-file .env app.js"
   },
   "author": "JDRO",
   "license": "ISC",
