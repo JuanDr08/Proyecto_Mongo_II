@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb');
-const Connection = require('../database');
+const {Connection} = require('../index');
 
 module.exports = class Users extends Connection {
 
