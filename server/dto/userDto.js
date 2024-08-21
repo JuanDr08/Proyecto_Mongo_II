@@ -54,6 +54,14 @@ module.exports = class userDto {
         }
     }
 
+    userCardFormatter(cedula, card, user){
+        return {
+            Nick: user,
+            cedula: Number(cedula),
+            tarjeta: JSON.parse(card)
+        }
+    }
+
     formatDataToBackend() {
 
         return {

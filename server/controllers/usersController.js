@@ -30,7 +30,26 @@ exports.getUserDetails = async (req, res) => {
     if(!userExists) return res.status(404).json(DTO.templateUserNotFound(req.params.id))
     
     let data = await userModel.getUserDetails(userExists)
-    let modelResponse = data.code == 13 ? DTO.templateUnauthorized(data.errorResponse) : (data) ? DTO.templateUserFound({Usuario: userExists, roles: data.roles}) : DTO.templateDefaultError(data)
+    let modelResponse = data.code == 13 ? DTO.templateUnauthorized(data.errorResponse) : DTO.templateUserFound({Usuario: userExists, roles: data.roles})
+
+    res.status(modelResponse.status).json(modelResponse)
+
+}
+
+exports.updateUserRoles = async (req, res) => {
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) return res.status(400).json({errors: errors.array()});
+
+    const DTO = new userDto({});
+    const userModel = new Users();
+
+    let userExists = await userModel.findUserById(req.params.id)
+    if(!userExists) return res.status(404).json(DTO.templateUserNotFound(req.params.id))
+
+    let cardFormated = DTO.userCardFormatter(req.params.id, req.body.tarjeta, userExists.Nick)
+    let data = await userModel.updateUserRole(cardFormated)
+    let modelResponse = data.code == 13 ? DTO.templateUnauthorized(data.errorResponse) : DTO.templateSuccesfullUserCreation(data)
 
     res.status(modelResponse.status).json(modelResponse)
 
