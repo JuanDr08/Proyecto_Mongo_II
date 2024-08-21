@@ -65,19 +65,16 @@ module.exports = class Users extends Connection {
         try {
             
             this.setCollection = "usuario"
-            let user = this.findUserById(arg)
-            if (!user) throw {Error: 'El usuario que ha ingresado no existe', status: "404"}
             let {users: [rol]} = await this.db.command({
                 usersInfo: {
-                    user: user.Nick,
+                    user: arg.Nick,
                     db: process.env.DB_NAME
                 }
             })
 
-            return {Usuario: user, roles: rol.roles}
+            return rol
 
         } catch (error) {
-            if (error.code == 13 || error.code == 121) return error.errorResponse
             return error
         }
 
@@ -196,7 +193,7 @@ module.exports = class Users extends Connection {
     async findUserById(arg) {
 
         this.setCollection = "usuario"
-        let user = await this.collection.findOne({_id : arg})
+        let user = await this.collection.findOne({_id : Number(arg)})
 
         return user
         
