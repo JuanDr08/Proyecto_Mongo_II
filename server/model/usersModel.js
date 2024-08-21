@@ -151,59 +151,40 @@ module.exports = class Users extends Connection {
      * @param {String} arg - String que debe indicar el filtro que se desea hacer, los posibles son (VIP, ESTANDAR O ADMIN)
      * @returns {Object} - {mensaje, ?data}
      */
-    async showAllUsers(arg = "") {
+    async showAllUsers() {
         try {
 
             this.setCollection = "usuario"
             
-            if (arg.toUpperCase() == "VIP") {
-                let {users} = await this.db.command({
-                    usersInfo: 1
-                })
-                let vips = users.filter(usr => {
-                    let {roles} = usr
-                    for(let role of roles){
-                        if(role.role == "UsuarioVip") {
-                            return role
-                        }
-                    }
-                })
-                return vips
-            } else if(arg.toUpperCase() == "ESTANDAR") {
-                let {users} = await this.db.command({
-                    usersInfo: 1
-                })
-                let estandars = users.filter(usr => {
-                    let {roles} = usr
-                    for(let role of roles){
-                        if(role.role == "UsuarioEstandar") {
-                            return role
-                        }
-                    }
-                })
-                return estandars
-            } else if(arg.toUpperCase() == "ADMIN") {
-                let {users} = await this.db.command({
-                    usersInfo: 1
-                })
-                let admins = users.filter(usr => {
-                    let {roles} = usr
-                    for(let role of roles){
-                        if(role.role == "Admin") {
-                            return role
-                        }
-                    }
-                })
-                return admins
-            }else {
-                let {users} = await this.db.command({
-                    usersInfo: 1
-                })
-                return users
-            }
+            let {users} = await this.db.command({
+                usersInfo: 1
+            })
+            return users
 
         } catch (error) {
-            if (error.code == 13 || error.code == 121) return error.errorResponse
+            return error
+        }
+    }
+
+    async showAllUsersFromEspecificRole(arg) {
+        try {
+
+            this.setCollection = "usuario"
+
+            let {users} = await this.db.command({
+                usersInfo: 1
+            })
+            let listOfUsers = users.filter(usr => {
+                let {roles} = usr
+                for(let role of roles){
+                    if(role.role == arg) {
+                        return role
+                    }
+                }
+            })
+            return listOfUsers
+
+        } catch(error) {
             return error
         }
     }
