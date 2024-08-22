@@ -11,10 +11,12 @@ const {
     createValidUserData,
     searchValidUserIdParam,
     infoPurchaseTicketValidator,
+    bodyCorrectSeatCodeFormat,
     updateUserRoles,
     getAllUsersDetails,
     buyTickets,
-    showSeatsDisponibilityFromAFunction
+    showSeatsDisponibilityFromAFunction,
+    reserveOneSeat
 } = require('./index')
 
 
@@ -31,5 +33,6 @@ router.get("/users", emptyBodyForGetRequestsValidation(), getAllUsersDetails) //
 router.post("/entries", infoPurchaseTicketValidator(), buyTickets)
 
 router.get("/movies/:id/seats", [ emptyBodyForGetRequestsValidation(), objectIdValidator() ], showSeatsDisponibilityFromAFunction)
+router.post("/movies/:id/seats", [objectIdValidator(), bodyCorrectSeatCodeFormat()], reserveOneSeat)
 
 module.exports = router

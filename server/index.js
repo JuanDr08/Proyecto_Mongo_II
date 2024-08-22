@@ -16,7 +16,8 @@ const {
     buyTickets
 } = require('./controllers/ticketsController');
 const {
-    showSeatsDisponibilityFromAFunction
+    showSeatsDisponibilityFromAFunction,
+    reserveOneSeat
 } = require('./controllers/funcionesController')
 
 // Models
@@ -42,6 +43,9 @@ const {
 const {
     infoPurchaseTicketValidator
 } = require('./validators/ticketValidator')
+const {
+    bodyCorrectSeatCodeFormat
+} = require('./validators/seatValidator')
 
 // Exports
 module.exports = {
@@ -55,6 +59,7 @@ module.exports = {
     getAllUsersDetails,
     buyTickets,
     showSeatsDisponibilityFromAFunction,
+    reserveOneSeat,
     // models
     Entries,
     Users,
@@ -69,5 +74,6 @@ module.exports = {
     searchValidUserIdParam,
     validatePatchUserInfo,
     existingRoleValidation,
-    infoPurchaseTicketValidator
+    infoPurchaseTicketValidator,
+    bodyCorrectSeatCodeFormat
 }
