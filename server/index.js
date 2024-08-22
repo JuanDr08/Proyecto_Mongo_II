@@ -12,9 +12,12 @@ const {
     updateUserRoles,
     getAllUsersDetails
 } = require('./controllers/usersController')
+const {
+    buyTickets
+} = require('./controllers/ticketsController');
 
 // Models
-const Entries = require('./controllers/boletosYAsientos');
+const Entries = require('./model/ticketsModel');
 const Users = require('./model/usersModel');
 const Movies = require('./model/moviesModel')
 
@@ -33,6 +36,9 @@ const {
     validatePatchUserInfo,
     existingRoleValidation
 } = require('./validators/usersValidator')
+const {
+    infoPurchaseTicketValidator
+} = require('./validators/ticketValidator')
 
 // Exports
 module.exports = {
@@ -44,6 +50,7 @@ module.exports = {
     getUserDetails,
     updateUserRoles,
     getAllUsersDetails,
+    buyTickets,
     // models
     Entries,
     Users,
@@ -57,5 +64,6 @@ module.exports = {
     createValidUserData,
     searchValidUserIdParam,
     validatePatchUserInfo,
-    existingRoleValidation
+    existingRoleValidation,
+    infoPurchaseTicketValidator
 }
