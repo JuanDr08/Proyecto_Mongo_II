@@ -54,10 +54,10 @@ module.exports = {
     // models
     Entries,
     Users,
-    moviesDTO,
     Movies,
     // DTO's
     userDto,
+    moviesDTO,
     // validators
     emptyBodyForGetRequestsValidation,
     objectIdValidator,

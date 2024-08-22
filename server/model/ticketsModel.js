@@ -25,46 +25,16 @@ module.exports = class Entries extends Connection {
      * @returns {Object} {mensaje, ?data}
      */
     async buyEntriesToAFunction(arg) {
-
         try {
-            
 
-            this.setCollection = "funcion"
-            let funcion = await this.collection.findOne({_id : ObjectId.createFromHexString(arg.id_funcion)})
-            if(!funcion) throw {Error: "La funcion ingresada no existe", status: "404"}
-            arg.id_sala = funcion.id_sala;
-
-            let {asientos} = funcion
-            let disponible = asientos.filter(obj => obj.codigo == arg.asiento.toUpperCase() && obj.estado == "disponible")
-            if (!disponible.length) throw {Error: 'El asiento ingresado ya esta reservado o no existe', status: "409 ", asientosSala: asientos}
-            
-            arg.subTotal = 14000
-            let total = arg.subTotal
-
-            this.collection.updateOne({_id: ObjectId.createFromHexString(arg.id_funcion), "asientos.codigo": arg.asiento.toUpperCase()}, {$set: {"asientos.$.estado": "comprada"}})
-
-            this.setCollection = "sala"
-            let sala = await this.collection.findOne({ _id : arg.id_sala})
-            if (arg.asiento.toUpperCase().includes(sala.filaVip)) total += total * 0.97;
-
-            this.setCollection = "usuario"
-            let validCard = await this.collection.findOne({_id: Number(process.env.PASSWORD), tarjeta: {$exists: true}, "tarjeta.estado": "activa"})
-            if (validCard) total = total * 0.80
-            
-            arg.Total = total
-            arg.cedula_user = Number(process.env.PASSWORD)
-            arg.id_funcion = ObjectId.createFromHexString(arg.id_funcion)
             this.setCollection = "boleto"
-            let query = await this.collection.insertOne(arg)
-
-            return query
+            return await this.collection.insertOne(arg)
 
         } catch (error) {
 
             return error
             
         }
-
     }
 
     /**
