@@ -16,7 +16,8 @@ const {
     getAllUsersDetails,
     buyTickets,
     showSeatsDisponibilityFromAFunction,
-    reserveOneSeat
+    reserveOneSeat,
+    cancelBookedSeat
 } = require('./index')
 
 
@@ -34,5 +35,6 @@ router.post("/entries", infoPurchaseTicketValidator(), buyTickets)
 
 router.get("/movies/:id/seats", [ emptyBodyForGetRequestsValidation(), objectIdValidator() ], showSeatsDisponibilityFromAFunction)
 router.post("/movies/:id/seats", [objectIdValidator(), bodyCorrectSeatCodeFormat()], reserveOneSeat)
+router.patch("/movies/:id/seats", [objectIdValidator(), bodyCorrectSeatCodeFormat()], cancelBookedSeat)
 
 module.exports = router
