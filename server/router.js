@@ -13,7 +13,8 @@ const {
     infoPurchaseTicketValidator,
     updateUserRoles,
     getAllUsersDetails,
-    buyTickets
+    buyTickets,
+    showSeatsDisponibilityFromAFunction
 } = require('./index')
 
 
@@ -28,5 +29,7 @@ router.get("/users/:rol", existingRoleValidation(), getAllUsersDetails) // Obten
 router.get("/users", emptyBodyForGetRequestsValidation(), getAllUsersDetails) // Obtener todos los usuarios existentes
 
 router.post("/entries", infoPurchaseTicketValidator(), buyTickets)
+
+router.get("/movies/:id/seats", [ emptyBodyForGetRequestsValidation(), objectIdValidator() ], showSeatsDisponibilityFromAFunction)
 
 module.exports = router

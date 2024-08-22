@@ -15,6 +15,9 @@ const {
 const {
     buyTickets
 } = require('./controllers/ticketsController');
+const {
+    showSeatsDisponibilityFromAFunction
+} = require('./controllers/funcionesController')
 
 // Models
 const Entries = require('./model/ticketsModel');
@@ -51,6 +54,7 @@ module.exports = {
     updateUserRoles,
     getAllUsersDetails,
     buyTickets,
+    showSeatsDisponibilityFromAFunction,
     // models
     Entries,
     Users,
