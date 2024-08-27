@@ -2,6 +2,7 @@ import { NavBar } from './headers/NavBar.jsx'
 import { CardsCarrusel } from './bodys/CardsCarrusel.jsx'
 import { ComingCards } from './bodys/ComingCards.jsx'
 import { useState } from 'react'
+import {FooterNavBar} from './footers/PrincipalFooter.jsx'
 
 
 export const App = () => {
@@ -45,7 +46,7 @@ export const App = () => {
 
                 </section>
 
-
+                <FooterNavBar />
 
             </main>
         </>
