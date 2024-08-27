@@ -18,7 +18,7 @@ const {
     showSeatsDisponibilityFromAFunction,
     reserveOneSeat,
     cancelBookedSeat
-} = require('./index')
+} = require('./index.cjs')
 
 
 

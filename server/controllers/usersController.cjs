@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
-const Users = require('../model/usersModel')
-const userDto = require('../dto/userDto')
+const Users = require('../model/usersModel.cjs')
+const userDto = require('../dto/userDto.cjs')
 
 exports.createUser = async (req, res) => {
 

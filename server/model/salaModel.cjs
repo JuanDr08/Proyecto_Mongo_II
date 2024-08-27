@@ -1,4 +1,4 @@
-const Connection = require('../database')
+const Connection = require('../database.cjs')
 
 module.exports = class Sala extends Connection {
 

@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
-const Cartelera = require('../model/funcionesModel')
-const FuncionesDto = require('../dto/funcionesDto')
+const Cartelera = require('../model/funcionesModel.cjs')
+const FuncionesDto = require('../dto/funcionesDto.cjs')
 
 exports.showSeatsDisponibilityFromAFunction = async (req, res) => {
 

@@ -1,4 +1,4 @@
-import { SectionIndicator } from "../headers/SectionIndicator"
+import { SectionIndicator } from "../headers/SectionIndicator.jsx"
 import { CastCards } from '../bodys/CastCards.jsx'
 import { CinemaCards } from '../bodys/CinemaCards.jsx'
 import { ButtomFooter } from "../footers/ButtomFooter.jsx"
@@ -17,6 +17,7 @@ export async function movieLoader ({params}) {
 export const MoviesDescComponent = ({title, genre, description, img}) => {
 
     const {data} = useLoaderData();
+    console.log(data)
 
     const [cinema, setCinema] = useState(null)
     console.log(cinema)
