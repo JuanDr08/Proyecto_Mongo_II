@@ -9,7 +9,8 @@ export default {
       colors: {
         'semiWhite': "#fff4",
         'linear': '#272727',
-        'footerNav': '#161616'
+        'footerNav': '#161616',
+        'principalBlack': '#121212'
       }
     },
   },

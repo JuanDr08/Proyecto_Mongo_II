@@ -13,6 +13,7 @@ export const HomeComponent = () => {
     return (
         <>
             <NavBar name="Juan David"/>
+            
             <main className='w-full'>
                 <section className='flex text-xl justify-between p-[20px]'>
                     <strong>Now playing</strong>
@@ -45,10 +46,9 @@ export const HomeComponent = () => {
                     </div>
 
                 </section>
-
-                <FooterNavBar />
-
             </main>
+
+            <FooterNavBar />
         </>
     )
 
