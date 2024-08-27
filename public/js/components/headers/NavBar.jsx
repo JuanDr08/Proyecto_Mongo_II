@@ -1,12 +1,12 @@
 
 
-export const NavBar = ({ name }) => {
+export const NavBar = ({ name, img }) => {
 
     return (
         <header className="h-auto flex gap-[15px] flex-col w-full p-[20px]">
 
             <section className="flex items-center justify-between">
-                <img className="w-[50px] rounded-full" src="https://unavatar.io/pheralb" alt="Profile Image" />
+                <img className="w-[50px] rounded-full" src={ img ?? "https://unavatar.io/pheralb" } alt="Profile Image" />
 
                 <div>
                     <p>Hi, { name }! </p>
