@@ -10,10 +10,6 @@ export const GridSeatsLayout = ({ fila }) => {
                 <SeatSquare/>
                 <SeatSquare/>
                 <SeatSquare/>
-                <SeatSquare/>
-                <SeatSquare/>
-                <SeatSquare/>
-                <SeatSquare/>
             </div>
         </div>
     )
