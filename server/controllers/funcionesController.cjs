@@ -2,6 +2,22 @@ const { validationResult } = require('express-validator');
 const Cartelera = require('../model/funcionesModel.cjs')
 const FuncionesDto = require('../dto/funcionesDto.cjs')
 
+exports.showFunctionsOfAnEspecificMovie = async (req, res) => {
+
+    const error = validationResult(req)
+    if(!error.isEmpty()) return res.status(400).json({errors: error.array()});
+
+    const DTO = new FuncionesDto()
+    const funcionesModel = new Cartelera()
+
+    let idPelicula = DTO.formatFunctionIdToHexString(req.params.id)
+    let functions = await funcionesModel.findFunctionByMovieId(idPelicula)
+    let modelResponse = functions.length ? DTO.templateSuccesfullBooking(functions) : DTO.templateNotExistingFunctionsWithMovie()
+
+    res.status(modelResponse.status).json(modelResponse)
+
+}
+
 exports.showSeatsDisponibilityFromAFunction = async (req, res) => {
 
     const error = validationResult(req);

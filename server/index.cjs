@@ -18,7 +18,8 @@ const {
 const {
     showSeatsDisponibilityFromAFunction,
     reserveOneSeat,
-    cancelBookedSeat
+    cancelBookedSeat,
+    showFunctionsOfAnEspecificMovie
 } = require('./controllers/funcionesController.cjs')
 
 // Models
@@ -62,6 +63,7 @@ module.exports = {
     showSeatsDisponibilityFromAFunction,
     reserveOneSeat,
     cancelBookedSeat,
+    showFunctionsOfAnEspecificMovie,
     // models
     Entries,
     Users,

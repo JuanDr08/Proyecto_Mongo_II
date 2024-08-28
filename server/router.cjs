@@ -17,13 +17,15 @@ const {
     buyTickets,
     showSeatsDisponibilityFromAFunction,
     reserveOneSeat,
-    cancelBookedSeat
+    cancelBookedSeat,
+    showFunctionsOfAnEspecificMovie
 } = require('./index.cjs')
 
 
 
 router.get("/movies", emptyBodyForGetRequestsValidation() ,listAllMovies) // Listar todas las peliculas
 router.get("/movies/:id", objectIdValidator(), getMovieByID) // Listar una pelicula segun su id
+router.get("/movie/:id/functions", objectIdValidator(), showFunctionsOfAnEspecificMovie)
 
 router.post("/user", createValidUserData(), createUser) // Crear Usuarios
 router.get("/user/:id", searchValidUserIdParam(), getUserDetails) // Obtener detalles de un usuario especifico
