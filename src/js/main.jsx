@@ -4,7 +4,7 @@ import { App } from './components/App.jsx'
 import '../css/style.css'
 
 createRoot( document.getElementById('root') ).render(
-    <React.StrictMode>
+    
         <App />
-    </React.StrictMode>
+    
 )
