@@ -7,22 +7,27 @@ import { useState } from 'react'
 import { useLoaderData } from 'react-router-dom';
 
 export async function moviesLoader () {
-    const data = await fetch('http://localhost:3000/movies', {
-        cache: "force-cache"
-    })
-    return await data.json()
+    let data = await fetch('http://localhost:3000/movies').then(res => res.json())
+    
+    let prox = data.data.filter(mov => mov.estado == 'proximamente')
+    data = data.data.filter(mov => mov.estado == 'en cartelera' || mov.estado == 'estreno')
+    
+    return {proximamente: prox, data: data}
 }
 
 export const HomeComponent = () => {
     
-    const {data} = useLoaderData();
-
+    const fullData = useLoaderData();
+    const {proximamente} = fullData
+    const {data} = fullData;
+    console.log(proximamente)
+    
     const [ movie, setMovie ] = useState({title: "puss in boots the last...", gender: "Adventure"})
 
 
     return (
         <>
-            <NavBar name="Juan David"/>
+            <NavBar name={import.meta.env.VITE_MONGOUSER}/>
             
             <main className='w-full'>
                 <section className='flex text-xl justify-between p-[20px]'>
@@ -52,8 +57,12 @@ export const HomeComponent = () => {
                         <a href="/" className='text-red-500'>See all</a>
                     </div>
                     
-                    <div className='flex justify-center items-center gap-[15px]  mb-[100px]'>
-                        <ComingCards/>
+                    <div className='flex flex-col justify-center items-center gap-[15px]  mb-[100px]'>
+                        {
+                            proximamente.map(({_id, titulo, poster, genero, fecha}) => (
+                                <ComingCards key={_id} fecha={fecha} title={titulo} poster={poster} genero={genero} />
+                            ))
+                        }
                     </div>
 
                 </section>

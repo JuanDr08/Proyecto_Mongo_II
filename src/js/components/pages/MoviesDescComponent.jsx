@@ -7,20 +7,17 @@ import { useLoaderData } from "react-router-dom"
 
 export async function movieLoader ({params}) {
 
-    const data = await fetch(`http://localhost:3000/movies/${params.id}`, {
-        cache: "force-cache"
-    })
-    return await data
+    const data = await fetch(`http://localhost:3000/movies/${params.id}`)
+    
+    return data
 
 }
 
-export const MoviesDescComponent = ({title, genre, description, img}) => {
+export const MoviesDescComponent = () => {
 
     const {data} = useLoaderData();
-    console.log(data)
 
     const [cinema, setCinema] = useState(null)
-    console.log(cinema)
     const selectCinema = (ref) => {
 
         let lastCinema = cinema;
@@ -43,14 +40,14 @@ export const MoviesDescComponent = ({title, genre, description, img}) => {
             <main className="p-[15px] pt-0 ">
 
                 <section className="w-full h-[250px]">
-                    <img className="w-[100%] h-[100%] object-cover object-[center_25%] rounded-2xl" src={img} alt="puss in boots" />
+                    <img className="w-[100%] h-[100%] object-cover object-[center_25%] rounded-2xl" src={`https://${data.poster}`} alt={`${data.titulo}`} />
                 </section>
 
                 <section className="tracking-wider text-[80%] flex flex-col gap-[10px] w-full p-[10px] " >
                     <div className="flex justify-between items-center">
                         <div className="w-[60%] ">
-                            <p><strong> { title } </strong></p>
-                            <p><small> { genre.join(', ') } </small></p>
+                            <p><strong> { data.titulo } </strong></p>
+                            <p><small> { data.genero } </small></p>
                         </div>
                         <button className=" flex items-center self-start justify-center gap-3 p-[8px] bg-red-600 rounded-xl " >
                             <svg width="15" height="15" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,23 +56,23 @@ export const MoviesDescComponent = ({title, genre, description, img}) => {
                             <p><small>Watch Trailer</small></p>
                         </button>
                     </div>
-                    <p> { description } </p>
+                    <p> { data.sinopsis } </p>
                 </section>
 
                 <section className={ `p-[10px] ${ cinema && 'mb-[100px]' }` }>
                     <p><strong>Cast</strong></p>
 
-                    <div className="flex max-w-full mt-[10px] mb-[20px] overflow-x-scroll">
-                        <CastCards/>
-                        <CastCards/>
-                        <CastCards/>
+                    <div className="flex max-w-full mt-[10px] pb-[20px] overflow-x-scroll">
+                        {
+                            data.cast.map(({name, img, rol}) => (
+                                <CastCards key={name} img={img} name={name} rol={rol} />
+                            ))
+                        }
                     </div>
 
                     <p className="mb-[10px]"><strong>Cinema</strong></p>
 
                     <div className="flex flex-col gap-[15px]">
-                        <CinemaCards changeCinema={selectCinema} />
-                        <CinemaCards changeCinema={selectCinema} />
                         <CinemaCards changeCinema={selectCinema} />
                     </div>
 
