@@ -21,6 +21,9 @@ const {
     cancelBookedSeat,
     showFunctionsOfAnEspecificMovie
 } = require('./controllers/funcionesController.cjs')
+const {
+    findRoomById
+} = require('./controllers/salaController.cjs')
 
 // Models
 const Entries = require('./model/ticketsModel.cjs');
@@ -64,6 +67,7 @@ module.exports = {
     reserveOneSeat,
     cancelBookedSeat,
     showFunctionsOfAnEspecificMovie,
+    findRoomById,
     // models
     Entries,
     Users,

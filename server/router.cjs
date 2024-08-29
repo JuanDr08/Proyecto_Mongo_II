@@ -18,7 +18,8 @@ const {
     showSeatsDisponibilityFromAFunction,
     reserveOneSeat,
     cancelBookedSeat,
-    showFunctionsOfAnEspecificMovie
+    showFunctionsOfAnEspecificMovie,
+    findRoomById
 } = require('./index.cjs')
 
 
@@ -34,6 +35,7 @@ router.get("/users/:rol", existingRoleValidation(), getAllUsersDetails) // Obten
 router.get("/users", emptyBodyForGetRequestsValidation(), getAllUsersDetails) // Obtener todos los usuarios existentes
 
 router.post("/entries", infoPurchaseTicketValidator(), buyTickets)
+router.get("/room/:id", objectIdValidator(), findRoomById)
 
 router.get("/movies/:id/seats", [ emptyBodyForGetRequestsValidation(), objectIdValidator() ], showSeatsDisponibilityFromAFunction)
 router.post("/movies/:id/seats", [objectIdValidator(), bodyCorrectSeatCodeFormat()], reserveOneSeat)

@@ -1,17 +1,17 @@
-import { NavBar } from '../headers/NavBar.jsx'
 import { CardsCarrusel } from '../bodys/CardsCarrusel.jsx'
 import { ComingCards } from '../bodys/ComingCards.jsx'
-import {FooterNavBar} from '../footers/PrincipalFooter.jsx'
+import { FooterNavBar } from '../footers/PrincipalFooter.jsx'
+import { NavBar } from '../headers/NavBar.jsx'
 // hooks
 import { useEffect, useRef, useState } from 'react'
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom'
 
 export async function moviesLoader () {
     let data = await fetch('http://localhost:3000/movies', {cache: "force-cache"}).then(res => res.json())
     
     let prox = data.data.filter(mov => mov.estado == 'proximamente')
     data = data.data.filter(mov => mov.estado == 'en cartelera' || mov.estado == 'estreno')
-    
+    sessionStorage.setItem('tiempo', )
     return {proximamente: prox, data: data}
 }
 
@@ -32,7 +32,7 @@ export const HomeComponent = () => {
         setActiveIndex(newIndex);
 
         if (carouselRef.current) {
-            carouselRef.current.style.transform = `translateX(-${newIndex * 270}px)`; 
+            carouselRef.current.style.transform = `translateX(-${newIndex * 272}px)`; 
         }
     };
 
