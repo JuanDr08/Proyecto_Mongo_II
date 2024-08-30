@@ -2,11 +2,11 @@ module.exports = class userDto {
 
     constructor({nombre, nick, rol, contrasenia, email, telefono}) {
 
-        this._id = contrasenia;
+        this._id = Number(contrasenia);
         this.nombre = nombre;
         this.Nick = nick;
         this.rol = rol;
-        this.contrasenia = contrasenia;
+        this.contrasenia = Number(contrasenia);
         this.email = email;
         this.telefono = String(telefono);
 
@@ -36,6 +36,20 @@ module.exports = class userDto {
     templateSuccesfullUserCreation(arg) {
         return {
             status: 201,
+            msg: arg
+        }
+    }
+
+    templateUserNotFound(arg) {
+        return {
+            status: 404,
+            msg: `No se encontró el usuario con id: ${arg}`
+        }
+    }
+
+    templateUserFound(arg) {
+        return {
+            status: 200,
             msg: arg
         }
     }
