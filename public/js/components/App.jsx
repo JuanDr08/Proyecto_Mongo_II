@@ -1,5 +1,6 @@
 import { NavBar } from './headers/NavBar.jsx'
 import { CardsCarrusel } from './bodys/CardsCarrusel.jsx'
+import { ComingCards } from './bodys/ComingCards.jsx'
 import { useState } from 'react'
 
 
@@ -32,7 +33,19 @@ export const App = () => {
                     <p>...</p>
                 </section>
 
-                
+                <section className='flex flex-col gap-[20px] p-[20px]'>
+                    <div className='flex text-xl justify-between'>
+                        <strong>Coming soon</strong>
+                        <a href="/" className='text-red-500'>See all</a>
+                    </div>
+                    
+                    <div className='flex justify-center items-center gap-[15px]'>
+                        <ComingCards/>
+                    </div>
+
+                </section>
+
+
 
             </main>
         </>

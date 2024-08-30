@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'semiWhite': "#fff4"
+        'semiWhite': "#fff4",
+        'linear': '#272727'
       }
     },
   },
