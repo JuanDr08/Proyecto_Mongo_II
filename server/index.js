@@ -17,7 +17,8 @@ const {
 } = require('./controllers/ticketsController');
 const {
     showSeatsDisponibilityFromAFunction,
-    reserveOneSeat
+    reserveOneSeat,
+    cancelBookedSeat
 } = require('./controllers/funcionesController')
 
 // Models
@@ -60,6 +61,7 @@ module.exports = {
     buyTickets,
     showSeatsDisponibilityFromAFunction,
     reserveOneSeat,
+    cancelBookedSeat,
     // models
     Entries,
     Users,

@@ -59,4 +59,18 @@ module.exports = class Cartelera extends Connection {
 
     }
 
+    async cancelBooking (arg) {
+
+        try {
+            
+            this.setCollection = "funcion"
+            let query = await this.collection.updateOne({_id: arg.funcion_id, "asientos.codigo": arg.seatCode}, {$set: {"asientos.$.estado": "disponible"}})
+            return query
+
+        } catch (error) {
+            return error
+        }
+
+    }
+
 }
