@@ -66,22 +66,23 @@ export const SeatsSelection = () => {
             .then(res => res.json()).then(data => setFuncion(data.msg))
     }, [])
 
-    const [daySelected, setDaySelected] = useState({})
+    const [daySelected, setDaySelected] = useState(null)
     const selectDay = (ref, id) => {
-        console.log(ref);
         let { elemento } = daySelected ?? 0
-        console.log('k',elemento);
-        if (elemento) {
+        if (elemento != undefined) {
             elemento.classList.remove('bg-rojoFuerte', 'text-white')
             elemento.classList.add('bg-white', 'text-black')
         }
-        if (ref == elemento) {
+        if (ref == elemento && elemento != undefined) {
             elemento.classList.remove('bg-rojoFuerte', 'text-white')
             ref.classList.add('bg-white', 'text-black')
-            return setDaySelected(null)
+            setDaySelected(null)
+            return console.log(daySelected)
+        } else {
+            ref.classList.remove('bg-white', 'text-black')
+            ref.classList.add('bg-rojoFuerte', 'text-white')
+            setDaySelected({ elemento: ref, id: id })
         }
-        ref.classList.add('bg-rojoFuerte', 'text-white')
-        setDaySelected({ elemento: ref, id: id })
     }
 
     const [horas, setHoras] = useState(null)
@@ -90,9 +91,8 @@ export const SeatsSelection = () => {
         if (id == 1 || id == 0 ) {
             let { hora } = functionSchedule[id]
             setHoras(hora)
-            console.log(horas);
         }
-
+        console.log('desde horas',daySelected)
     }, [daySelected])
 
     return (
@@ -151,10 +151,10 @@ export const SeatsSelection = () => {
                                         ))
                                     }
                                 </div>
-                                <div>
+                                <div className="flex gap-[20px]">
                                     {
                                         horas && (
-                                            <HoursCard horas={horas} />
+                                            <HoursCard setSelected={selectDay} horas={horas} />
                                         )
                                     }
                                 </div>
