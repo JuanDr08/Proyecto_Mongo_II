@@ -1,13 +1,13 @@
 
 
-export const CastCards = () => {
+export const CastCards = ({name, img, rol}) => {
 
     return (
         <div className="flex gap-[10px] min-w-[200px] items-center" >
-            <img className="w-[50px] rounded-full" src="https://unavatar.io/pheralb" alt="Profile Image" />
+            <img className="w-[50px] h-[50px] rounded-full object-fit" src={`https://${img}`} alt="Profile Image" />
             <div className="text-xs">
-                <p><strong>Pheralb</strong></p>
-                <p className="text-semiWhite">puss in boots</p>
+                <p><strong> { name } </strong></p>
+                <p className="text-semiWhite">{rol}</p>
             </div>
         </div>
     )
