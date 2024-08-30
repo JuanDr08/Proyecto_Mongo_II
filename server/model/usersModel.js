@@ -92,38 +92,56 @@ module.exports = class Users extends Connection {
     async updateUserRole(arg) {
         try {
             this.setCollection = "usuario"
-            let validateUser = await this.collection.findOne({_id: arg.cedula})
-            if(!validateUser) throw {Error: 'El usuario que ha ingresado no existe', status: "404"}
             
             if(arg.tarjeta) {
-                await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {fechaVencimiento: new Date(), estado: "activa"} }})
+                await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {fechaVencimiento: new Date(), estado: "activa"}, rol: "UsuarioVip" }})
 
-                let query = await this.db.command({
-                    grantRolesToUser: validateUser.Nick,
-                    roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
-                })
-                await this.db.command({
-                    revokeRolesFromUser: validateUser.Nick,
-                    roles: [{ role: "UsuarioEstandar", db: process.env.DB_NAME }]
-                })
-                return {ActualizaciónExitosa: "Rol del usuario actualizado", usuario: query}
+                let query = await this.addVipRoleToUser(arg)
+                this.removeEstandarRoleToUser(arg)
+
+                return query
             }
 
-            await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {estado: "inactiva"} }})
-            let query = await this.db.command({
-                grantRolesToUser: validateUser.Nick,
-                roles: [{ role: "UsuarioEstandar", db: process.env.DB_NAME }]
-            })
-            await this.db.command({
-                revokeRolesFromUser: validateUser.Nick,
-                roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
-            })
-            return {ActualizaciónExitosa: "Rol del usuario actualizado", usuario: query}
+            await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {estado: "inactiva"}, rol: "UsuarioEstandar" }})
+
+            let query = await this.addEstandarRoleToUser(arg)
+            this.removeVipRoleToUser(arg)
+
+            return query
 
         } catch (error) {
-            if (error.code == 13 || error.code == 121) return error.errorResponse
             return error
         }
+    }
+
+    async addVipRoleToUser(arg) {
+        return await this.db.command({
+            grantRolesToUser: arg.Nick,
+            roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
+        })
+    }
+
+    async removeVipRoleToUser(arg) {
+        await this.db.command({
+            revokeRolesFromUser: arg.Nick,
+            roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
+        })
+    }
+
+    async addEstandarRoleToUser(arg) {
+        this.setCollection = "usuario"
+        return await this.db.command({
+            grantRolesToUser: arg.Nick,
+            roles: [{ role: "UsuarioEstandar", db: process.env.DB_NAME }]
+        })
+    }
+
+    async removeEstandarRoleToUser(arg) {
+        this.setCollection = "usuario"
+        await this.db.command({
+            revokeRolesFromUser: arg.Nick,
+            roles: [{ role: "UsuarioEstandar", db: process.env.DB_NAME }]
+        })
     }
 
     /**

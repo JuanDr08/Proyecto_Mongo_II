@@ -7,8 +7,10 @@ const {
     getUserDetails,
     emptyBodyForGetRequestsValidation,
     objectIdValidator,
+    validatePatchUserInfo,
     createValidUserData,
-    searchValidUserIdParam
+    searchValidUserIdParam,
+    updateUserRoles
 } = require('./index')
 
 
@@ -18,5 +20,6 @@ router.get("/movies/:id", objectIdValidator(), getMovieByID) // Listar una pelic
 
 router.post("/user", createValidUserData(), createUser)
 router.get("/user/:id", searchValidUserIdParam(), getUserDetails)
+router.patch("/user/:id", validatePatchUserInfo(), updateUserRoles)
 
 module.exports = router

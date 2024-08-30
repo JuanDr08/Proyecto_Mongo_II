@@ -8,7 +8,8 @@ const {
 } = require('./controllers/moviesController');
 const {
     createUser,
-    getUserDetails
+    getUserDetails,
+    updateUserRoles
 } = require('./controllers/usersController')
 
 // Models
@@ -27,7 +28,8 @@ const {
 } = require('./validators/generalValidators')
 const {
     createValidUserData,
-    searchValidUserIdParam
+    searchValidUserIdParam,
+    validatePatchUserInfo
 } = require('./validators/usersValidator')
 
 // Exports
@@ -38,6 +40,7 @@ module.exports = {
     getMovieByID,
     createUser,
     getUserDetails,
+    updateUserRoles,
     // models
     Entries,
     Users,
@@ -49,5 +52,6 @@ module.exports = {
     emptyBodyForGetRequestsValidation,
     objectIdValidator,
     createValidUserData,
-    searchValidUserIdParam
+    searchValidUserIdParam,
+    validatePatchUserInfo
 }

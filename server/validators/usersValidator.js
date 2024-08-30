@@ -29,3 +29,12 @@ exports.searchValidUserIdParam = () => {
     ]
 
 }
+
+exports.validatePatchUserInfo = () => {
+
+    return [
+        param('id').isInt().withMessage("Debe filtrar unicamente por enteros"),
+        body('tarjeta').toLowerCase().isBoolean().withMessage("El valor del campo tarjeta es requerido y debe ser un booleano")
+    ]
+
+}
