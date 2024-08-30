@@ -22,6 +22,15 @@ module.exports = class Cartelera extends Connection {
         return funcion;
     }
 
+    async findFunctionByMovieId(arg) {
+
+        this.setCollection = "funcion"
+        let funcion = await this.collection.find({id_pelicula: arg}).toArray()
+
+        return funcion
+
+    }
+
     async seatDisponibility(funcion, arg) {
 
         let {asientos} = funcion;

@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { useLoaderData } from 'react-router-dom';
 
 export async function moviesLoader () {
-    let data = await fetch('http://localhost:3000/movies').then(res => res.json())
+    let data = await fetch('http://localhost:3000/movies', {cache: "force-cache"}).then(res => res.json())
     
     let prox = data.data.filter(mov => mov.estado == 'proximamente')
     data = data.data.filter(mov => mov.estado == 'en cartelera' || mov.estado == 'estreno')
@@ -20,7 +20,6 @@ export const HomeComponent = () => {
     const fullData = useLoaderData();
     const {proximamente} = fullData
     const {data} = fullData;
-    console.log(proximamente)
     
     const [ movie, setMovie ] = useState({title: "puss in boots the last...", gender: "Adventure"})
 

@@ -7,7 +7,7 @@ import { useLoaderData } from "react-router-dom"
 
 export async function movieLoader ({params}) {
 
-    const data = await fetch(`http://localhost:3000/movies/${params.id}`)
+    const data = await fetch(`http://localhost:3000/movies/${params.id}`, {cache: "force-cache"})
     
     return data
 

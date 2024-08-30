@@ -38,6 +38,13 @@ module.exports = class FuncionesDto {
         }
     }
 
+    templateNotExistingFunctionsWithMovie() {
+        return {
+            status: 404,
+            msg: `No se encontraron funciones disponibles con ese id de pelicula`
+        }
+    }
+
     templateNonExistingFunction(arg){
         return {
             status: 404,
