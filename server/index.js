@@ -9,7 +9,8 @@ const {
 const {
     createUser,
     getUserDetails,
-    updateUserRoles
+    updateUserRoles,
+    getAllUsersDetails
 } = require('./controllers/usersController')
 
 // Models
@@ -29,7 +30,8 @@ const {
 const {
     createValidUserData,
     searchValidUserIdParam,
-    validatePatchUserInfo
+    validatePatchUserInfo,
+    existingRoleValidation
 } = require('./validators/usersValidator')
 
 // Exports
@@ -41,6 +43,7 @@ module.exports = {
     createUser,
     getUserDetails,
     updateUserRoles,
+    getAllUsersDetails,
     // models
     Entries,
     Users,
@@ -53,5 +56,6 @@ module.exports = {
     objectIdValidator,
     createValidUserData,
     searchValidUserIdParam,
-    validatePatchUserInfo
+    validatePatchUserInfo,
+    existingRoleValidation
 }

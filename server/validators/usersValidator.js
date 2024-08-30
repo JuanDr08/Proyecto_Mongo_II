@@ -5,7 +5,7 @@ exports.createValidUserData = () => {
     return [
         body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
         body('nick').notEmpty().withMessage('El nick es obligatorio'),
-        body('rol', 'El r ol no se envio').exists().notEmpty().custom((value) => {
+        body('rol', 'El rol no se envio').custom((value) => {
             if (value && !['UsuarioEstandar', 'UsuarioVip', 'Admin'].includes(value)) throw new Error("Solo hay tres roles definidos 'UsuarioEstandar', 'UsuarioVip', 'Admin'")
             return true
         }),
@@ -35,6 +35,23 @@ exports.validatePatchUserInfo = () => {
     return [
         param('id').isInt().withMessage("Debe filtrar unicamente por enteros"),
         body('tarjeta').toLowerCase().isBoolean().withMessage("El valor del campo tarjeta es requerido y debe ser un booleano")
+    ]
+
+}
+
+exports.existingRoleValidation = () => {
+
+    return [
+        param('rol').custom((value) => {
+            if (value && !['vip', 'estandar', 'admin'].includes(value.toLowerCase())) throw new Error("Solo hay tres filtros definidos 'vip', 'estandar', 'admin'")
+            return true
+        }),
+        body().custom((value, { req }) => {
+
+            if (Object.keys(req.body).length > 0) throw new Error('Unauthorized body data')
+            return true
+
+        })
     ]
 
 }

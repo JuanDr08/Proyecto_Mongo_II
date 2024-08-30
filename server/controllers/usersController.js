@@ -54,3 +54,21 @@ exports.updateUserRoles = async (req, res) => {
     res.status(modelResponse.status).json(modelResponse)
 
 }
+
+exports.getAllUsersDetails = async (req, res) => {
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) return res.status(400).json({errors: errors.array()});
+
+    const DTO = new userDto({});
+    const userModel = new Users();
+    let data = req.params.rol == undefined ?
+    await userModel.showAllUsers() : req.params.rol.toUpperCase() == "VIP" ? 
+    await userModel.showAllUsersFromEspecificRole("UsuarioVip") : req.params.rol.toUpperCase() == "ADMIN" ?
+    await userModel.showAllUsersFromEspecificRole("Admin") : await userModel.showAllUsersFromEspecificRole("UsuarioEstandar")
+
+    let modelResponse = data.code == 13 ? DTO.templateUnauthorized(data.errorResponse) : !data.length ? DTO.templateUsersNotFound(req.params.rol) : DTO.templateUserFound(data)
+
+    res.status(modelResponse.status).json(modelResponse)
+
+}

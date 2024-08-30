@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const path = require('path');
 const {
     listAllMovies,
     getMovieByID,
@@ -8,9 +7,11 @@ const {
     emptyBodyForGetRequestsValidation,
     objectIdValidator,
     validatePatchUserInfo,
+    existingRoleValidation,
     createValidUserData,
     searchValidUserIdParam,
-    updateUserRoles
+    updateUserRoles,
+    getAllUsersDetails
 } = require('./index')
 
 
@@ -18,8 +19,10 @@ const {
 router.get("/movies", emptyBodyForGetRequestsValidation() ,listAllMovies) // Listar todas las peliculas
 router.get("/movies/:id", objectIdValidator(), getMovieByID) // Listar una pelicula segun su id
 
-router.post("/user", createValidUserData(), createUser)
-router.get("/user/:id", searchValidUserIdParam(), getUserDetails)
-router.patch("/user/:id", validatePatchUserInfo(), updateUserRoles)
+router.post("/user", createValidUserData(), createUser) // Crear Usuarios
+router.get("/user/:id", searchValidUserIdParam(), getUserDetails) // Obtener detalles de un usuario especifico
+router.patch("/user/:id", validatePatchUserInfo(), updateUserRoles) // Actualizar los roles de un usuario
+router.get("/users/:rol", existingRoleValidation(), getAllUsersDetails) // Obtener todos los usuarios que tienen un rol especifico
+router.get("/users", emptyBodyForGetRequestsValidation(), getAllUsersDetails) // Obtener todos los usuarios existentes
 
 module.exports = router

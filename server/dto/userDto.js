@@ -47,6 +47,13 @@ module.exports = class userDto {
         }
     }
 
+    templateUsersNotFound(arg) {
+        return {
+            status: 404,
+            msg: `No se encontraron usuarios con el rol: ${arg}`
+        }
+    }
+
     templateUserFound(arg) {
         return {
             status: 200,
