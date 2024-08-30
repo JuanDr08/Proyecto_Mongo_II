@@ -8,7 +8,8 @@ export default {
     extend: {
       colors: {
         'semiWhite': "#fff4",
-        'linear': '#272727'
+        'linear': '#272727',
+        'footerNav': '#161616'
       }
     },
   },
