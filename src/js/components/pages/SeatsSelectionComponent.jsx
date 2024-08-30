@@ -4,6 +4,8 @@ import { SectionIndicator } from "../headers/SectionIndicator"
 import { GridSeatsLayout } from "../bodys/GridSeatsLayout";
 import { SeatStatus } from "../bodys/SeatStatus";
 import { useEffect, useState } from "react";
+import { DaysCard } from "../bodys/DaysCard";
+import { HoursCard } from "../bodys/HoursCard";
 
 const DAYS = {
     '0': 'Domingo',
@@ -20,31 +22,32 @@ export const SeatsSelection = () => {
     const { id } = useParams();
     const [funcion, setFuncion] = useState(null)
     const [formatDay, setFormatDay] = useState([])
+    const [functionSchedule, setFunctionSchedule] = useState([])
 
     useEffect(() => {
         let resultado = {}
-        
+
         formatDay.forEach(val => {
-            
-            const clave = `${val.dia}-${val.dia_semana}`; 
-            if (!resultado[clave]) resultado[clave] = {...val}
+
+            const clave = `${val.dia}-${val.dia_semana}`;
+            if (!resultado[clave]) resultado[clave] = { ...val }
             else {
                 const horasUnicas = new Set([...resultado[clave].hora, ...val.hora].map(JSON.stringify))
                 resultado[clave].hora = Array.from(horasUnicas).map(JSON.parse)
             }
-            
+
         })
         const arregloFinal = Object.values(resultado)
-        console.log(arregloFinal)
+        setFunctionSchedule(arregloFinal)
     }, [formatDay])
 
     useEffect(() => {
         if (!funcion) return
-        funcion.forEach(({_id,fecha_init}) => {
-            let diaSemana = DAYS[`${new Date(fecha_init).getDay()}`].slice(0,3);
+        funcion.forEach(({ _id, fecha_init }) => {
+            let diaSemana = DAYS[`${new Date(fecha_init).getDay()}`].slice(0, 3);
             let dia = new Date(fecha_init).getDate()
-            
-            
+
+
             let objFuncion = {
                 dia_semana: diaSemana,
                 dia: dia,
@@ -62,6 +65,35 @@ export const SeatsSelection = () => {
         let funciones = fetch(`http://localhost:3000/movie/${id}/functions`)
             .then(res => res.json()).then(data => setFuncion(data.msg))
     }, [])
+
+    const [daySelected, setDaySelected] = useState({})
+    const selectDay = (ref, id) => {
+        console.log(ref);
+        let { elemento } = daySelected ?? 0
+        console.log('k',elemento);
+        if (elemento) {
+            elemento.classList.remove('bg-rojoFuerte', 'text-white')
+            elemento.classList.add('bg-white', 'text-black')
+        }
+        if (ref == elemento) {
+            elemento.classList.remove('bg-rojoFuerte', 'text-white')
+            ref.classList.add('bg-white', 'text-black')
+            return setDaySelected(null)
+        }
+        ref.classList.add('bg-rojoFuerte', 'text-white')
+        setDaySelected({ elemento: ref, id: id })
+    }
+
+    const [horas, setHoras] = useState(null)
+    useEffect(() => {
+        let { id } = daySelected ?? false
+        if (id == 1 || id == 0 ) {
+            let { hora } = functionSchedule[id]
+            setHoras(hora)
+            console.log(horas);
+        }
+
+    }, [daySelected])
 
     return (
         <>
@@ -95,7 +127,7 @@ export const SeatsSelection = () => {
                                 <p>Screen this way</p>
                             </section>
 
-                            <section className="flex flex-col gap-2 p-[15px]">
+                            <section className="flex flex-col gap-2 p-[20px]">
                                 <GridSeatsLayout fila="A" />
                                 <GridSeatsLayout fila="B" />
                                 <span className="h-[40px]"></span>
@@ -106,13 +138,26 @@ export const SeatsSelection = () => {
                             </section>
 
                             <div className="flex w-full justify-center gap-[20px]">
-                                <SeatStatus text='Aviable' color='linear'/>
-                                <SeatStatus text='Reserved' color='white'/>
-                                <SeatStatus text='Selected' color='red'/>
+                                <SeatStatus text='Aviable' color='linear' />
+                                <SeatStatus text='Reserved' color='white' />
+                                <SeatStatus text='Selected' color='rojoFuerte' />
                             </div>
 
-                            <section>
-
+                            <section className="flex flex-col gap-[20px] ml-[20px] ">
+                                <div className="flex gap-[20px]">
+                                    {
+                                        functionSchedule.map(({ dia, dia_semana }, i) => (
+                                            <DaysCard key={i} id={i} setSelected={selectDay} dia={dia} dayName={dia_semana} />
+                                        ))
+                                    }
+                                </div>
+                                <div>
+                                    {
+                                        horas && (
+                                            <HoursCard horas={horas} />
+                                        )
+                                    }
+                                </div>
                             </section>
 
                         </>
