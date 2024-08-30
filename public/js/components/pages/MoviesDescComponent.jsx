@@ -1,7 +1,83 @@
+import { SectionIndicator } from "../headers/SectionIndicator"
+import { CastCards } from '../bodys/CastCards.jsx'
+import { CinemaCards } from '../bodys/CinemaCards.jsx'
+import { ButtomFooter } from "../footers/ButtomFooter.jsx"
+import { useState } from "react"
 
+export const MoviesDescComponent = ({title, genre, description, img}) => {
 
-export const MoviesDescComponent = () => {
+    const [cinema, setCinema] = useState(null)
+    console.log(cinema)
+    const selectCinema = (ref) => {
 
-    return <h1>HOLA</h1>
+        let lastCinema = cinema;
+        if (lastCinema === ref) {
+            ref.classList.remove('outline','outline-red-600', 'outline-4')
+            return setCinema(null)
+        };
+        lastCinema?.classList && lastCinema.classList.remove('outline','outline-red-600', 'outline-4')
+        ref.classList.add('outline','outline-red-600', 'outline-4')
+        setCinema(ref)
+
+    }
+
+    return (
+
+        <>
+
+            <SectionIndicator section="Cinema Selection" />
+
+            <main className="p-[15px] pt-0 ">
+
+                <section className="w-full h-[250px]">
+                    <img className="w-[100%] h-[100%] object-cover object-[center_25%] rounded-2xl" src={img} alt="puss in boots" />
+                </section>
+
+                <section className="tracking-wider text-[80%] flex flex-col gap-[10px] w-full p-[10px] " >
+                    <div className="flex justify-between items-center">
+                        <div className="w-[60%] ">
+                            <p><strong> { title } </strong></p>
+                            <p><small> { genre.join(', ') } </small></p>
+                        </div>
+                        <button className=" flex items-center self-start justify-center gap-3 p-[8px] bg-red-600 rounded-xl " >
+                            <svg width="15" height="15" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 6L0.75 11.1962L0.750001 0.803847L9 6Z" fill="white" />
+                            </svg>
+                            <p><small>Watch Trailer</small></p>
+                        </button>
+                    </div>
+                    <p> { description } </p>
+                </section>
+
+                <section className={ `p-[10px] ${ cinema && 'mb-[100px]' }` }>
+                    <p><strong>Cast</strong></p>
+
+                    <div className="flex max-w-full mt-[10px] mb-[20px] overflow-x-scroll">
+                        <CastCards/>
+                        <CastCards/>
+                        <CastCards/>
+                    </div>
+
+                    <p className="mb-[10px]"><strong>Cinema</strong></p>
+
+                    <div className="flex flex-col gap-[15px]">
+                        <CinemaCards changeCinema={selectCinema} />
+                        <CinemaCards changeCinema={selectCinema} />
+                        <CinemaCards changeCinema={selectCinema} />
+                    </div>
+
+                </section>
+
+            </main>
+
+            {
+                cinema && (
+                    <ButtomFooter btnText='Book Now' />
+                )
+            }
+
+        </>
+
+    )
 
 }
