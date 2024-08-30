@@ -1,5 +1,6 @@
 import { HomeComponent } from './pages/HomeComponent.jsx'
 import { MoviesDescComponent } from './pages/MoviesDescComponent.jsx'
+import { SeatsSelection } from './pages/SeatsSelectionComponent.jsx'
 import {
     createBrowserRouter,
     RouterProvider
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     {
         path: '/movie/:id',
         element: <MoviesDescComponent title='Puss in boots the last wish' genre={['Action', 'Adventure']} description={movieDescription} img={img}/>
+    },
+    {
+        path: '/movie/:id/seats',
+        element: <SeatsSelection />
     }
 ])
 
