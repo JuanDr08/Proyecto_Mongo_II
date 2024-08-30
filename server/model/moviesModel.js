@@ -31,7 +31,7 @@ module.exports = class Movies extends Connection {
     async showAllCurrentMovies() {
 
         this.setCollection = "pelicula"
-        let query = await this.collection.find({estado: "en cartelera"}).toArray()
+        let query = await this.collection.find({estado: {$in: ["en cartelera", "estreno"]}}).toArray()
         return query
 
     }

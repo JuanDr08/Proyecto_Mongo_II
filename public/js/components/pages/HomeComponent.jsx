@@ -1,11 +1,21 @@
 import { NavBar } from '../headers/NavBar.jsx'
 import { CardsCarrusel } from '../bodys/CardsCarrusel.jsx'
 import { ComingCards } from '../bodys/ComingCards.jsx'
-import { useState } from 'react'
 import {FooterNavBar} from '../footers/PrincipalFooter.jsx'
+// hooks
+import { useState } from 'react'
+import { useLoaderData } from 'react-router-dom';
 
+export async function moviesLoader () {
+    const data = await fetch('http://localhost:3000/movies', {
+        cache: "force-cache"
+    })
+    return await data.json()
+}
 
 export const HomeComponent = () => {
+    
+    const {data} = useLoaderData();
 
     const [ movie, setMovie ] = useState({title: "puss in boots the last...", gender: "Adventure"})
 
@@ -22,10 +32,11 @@ export const HomeComponent = () => {
 
                 <div className='my-[10px] flex max-w-full overflow-x-scroll'>
                     <div className='flex gap-[20px]'>
-                    <CardsCarrusel/>
-                    <CardsCarrusel/>
-                    <CardsCarrusel/>
-                    <CardsCarrusel/>
+                    {
+                        data.map(({_id, title, poster}) => {
+                            return <CardsCarrusel key={_id} id={_id} title={title} poster={poster}/>
+                        })
+                    }
                     </div>
                 </div>  
 

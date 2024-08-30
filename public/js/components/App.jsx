@@ -1,5 +1,5 @@
-import { HomeComponent } from './pages/HomeComponent.jsx'
-import { MoviesDescComponent } from './pages/MoviesDescComponent.jsx'
+import { HomeComponent, moviesLoader } from './pages/HomeComponent.jsx'
+import { MoviesDescComponent, movieLoader } from './pages/MoviesDescComponent.jsx'
 import { SeatsSelection } from './pages/SeatsSelectionComponent.jsx'
 import {
     createBrowserRouter,
@@ -11,11 +11,13 @@ const img = 'https://w0.peakpx.com/wallpaper/292/886/HD-wallpaper-puss-in-boots-
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <HomeComponent/>
+        element: <HomeComponent/>,
+        loader: moviesLoader
     },
     {
         path: '/movie/:id',
-        element: <MoviesDescComponent title='Puss in boots the last wish' genre={['Action', 'Adventure']} description={movieDescription} img={img}/>
+        element: <MoviesDescComponent title='Puss in boots the last wish' genre={['Action', 'Adventure']} description={movieDescription} img={img}/>,
+        loader: movieLoader
     },
     {
         path: '/movie/:id/seats',

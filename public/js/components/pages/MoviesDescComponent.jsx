@@ -3,8 +3,20 @@ import { CastCards } from '../bodys/CastCards.jsx'
 import { CinemaCards } from '../bodys/CinemaCards.jsx'
 import { ButtomFooter } from "../footers/ButtomFooter.jsx"
 import { useState } from "react"
+import { useLoaderData } from "react-router-dom"
+
+export async function movieLoader ({params}) {
+
+    const data = await fetch(`http://localhost:3000/movies/${params.id}`, {
+        cache: "force-cache"
+    })
+    return await data
+
+}
 
 export const MoviesDescComponent = ({title, genre, description, img}) => {
+
+    const {data} = useLoaderData();
 
     const [cinema, setCinema] = useState(null)
     console.log(cinema)
