@@ -38,31 +38,6 @@ module.exports = class Entries extends Connection {
     }
 
     /**
-     * * API para listar los asientos disponibles para cierta funcion
-     * TODO: listar los asientos disponibles en una funcion especifica
-     * ? "66a807cca5aad36c22a20ca3" arg
-     * 
-     * @param {String} arg - Codigo de la funcion la cual se desea verificar la disponibilidad
-     * @returns {Object} {mensaje, ?data}
-     */
-    async seatsDisponibility(arg) {
-
-        try {
-            
-            this.setCollection = "funcion"
-            let funcion = await this.collection.findOne({ _id : ObjectId.createFromHexString(arg)})
-            let {asientos} = funcion;
-
-            return asientos
-
-        } catch (error) {
-            return {Error: 'El id de la funcion que ha ingresado no existe', status: "404"}
-        }
-
-    }
-
-
-    /**
      * * API para realizar reservas de asientos existentes y disponibles
      * TODO: permitir la reserva de asientos que se encuentren disponibles en una funcion especifica
      * ? {funcion_id: "66a807cca5aad36c22a20ca3", seatCode: "A1"}
