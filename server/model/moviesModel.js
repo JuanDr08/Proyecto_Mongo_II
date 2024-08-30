@@ -1,21 +1,26 @@
 const { ObjectId } = require('mongodb');
-const Query = require('./query');
+const Connection = require('../database');
 
-module.exports = class Movies extends Query {
+module.exports = class Movies extends Connection {
 
     static instance;
 
     constructor() {
-        super()
+
+        if (Movies.instance === "object") return Movies.instance;
+        super();
+        Movies.instance = this;
+        return this;
+
     }
 
-    static get getInstance() {
+    /* static get getInstance() {
 
         if (Movies.instance === "object") return Movies.instance;
         Movies.instance = new Movies();
         return this;
 
-    }
+    } */
 
     /**
      * * API para listar las peliculas disponibles
@@ -42,14 +47,8 @@ module.exports = class Movies extends Query {
     async showMovieDetailsById(id) {
 
         this.setCollection = "pelicula";
-        try {
-
-            let query = await this.collection.findOne({_id: ObjectId.createFromHexString(id)})
-            return query
-
-        } catch (e) {
-            return {error: "El id ingresado es invalido, recuerde que debe ser un ObjectId existente"}
-        }
+        let query = await this.collection.findOne({_id: ObjectId.createFromHexString(id)})
+        return query
 
     }
 

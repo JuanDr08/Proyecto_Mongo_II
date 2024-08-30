@@ -1,6 +1,6 @@
-const Query = require('./query');
+const Connection = require('../database');
 
-module.exports =  class Vip extends Query {
+module.exports =  class Vip extends Connection {
 
     static instance
 
