@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
-const Movies = require('../model/moviesModel');
-const moviesDTO = require('../dto/moviesDto')
+const Movies = require('../model/moviesModel.cjs');
+const moviesDTO = require('../dto/moviesDto.cjs')
 
 exports.listAllMovies = async (req, res) => { // Logica para listar todas las peliculas
 

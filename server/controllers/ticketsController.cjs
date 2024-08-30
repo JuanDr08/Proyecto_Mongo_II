@@ -1,9 +1,9 @@
 const { validationResult } = require('express-validator');
-const Cartelera = require('../model/funcionesModel')
-const ticketsDto = require('../dto/ticketsDto')
-const Entries = require('../model/ticketsModel')
-const Sala = require('../model/salaModel');
-const Users = require('../model/usersModel')
+const Cartelera = require('../model/funcionesModel.cjs')
+const ticketsDto = require('../dto/ticketsDto.cjs')
+const Entries = require('../model/ticketsModel.cjs')
+const Sala = require('../model/salaModel.cjs');
+const Users = require('../model/usersModel.cjs')
 
 exports.buyTickets = async (req, res) => {
 
