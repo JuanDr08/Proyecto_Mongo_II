@@ -38,23 +38,23 @@ module.exports = class Cartelera extends Connection {
     }
 
     /**
-     * * API para listar los asientos disponibles para cierta funcion
-     * TODO: listar los asientos disponibles en una funcion especifica
-     * ? "66a807cca5aad36c22a20ca3" arg
+     * * API para realizar reservas de asientos existentes y disponibles
+     * TODO: permitir la reserva de asientos que se encuentren disponibles en una funcion especifica
+     * ? {funcion_id: "66a807cca5aad36c22a20ca3", seatCode: "A1"}
      * 
-     * @param {String} arg - Codigo de la funcion la cual se desea verificar la disponibilidad
+     * @param {Object} arg - Objeto que contiene los datos necesarios para realizar la reserva de un asiento
      * @returns {Object} {mensaje, ?data}
      */
-    async allSeatsDisponibilityInAFunction(arg) {
+    async reserveSeats(arg) {
 
         try {
             
             this.setCollection = "funcion"
-            let funcion = await this.collection.findOne({ _id : arg})
-            return funcion;   
-
+            let query = await this.collection.updateOne({_id: arg.funcion_id, "asientos.codigo": arg.seatCode}, {$set: {"asientos.$.estado": "reservada"}})
+            return query
+            
         } catch (error) {
-            return {Error: 'El id de la funcion que ha ingresado no existe', status: "404"}
+            return error
         }
 
     }
