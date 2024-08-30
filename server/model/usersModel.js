@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb');
-const {Connection} = require('../index');
+const Connection = require('../database');
 
 module.exports = class Users extends Connection {
 
@@ -34,11 +34,9 @@ module.exports = class Users extends Connection {
 
         try {
             
-            this.setCollection = "usuario"
-            arg._id = arg.contrasenia
-            arg.telefono = String(arg.telefono)
+            this.setCollection = "usuario";
             let insercion = await this.collection.insertOne(arg)
-            let query = await this.db.command({
+            await this.db.command({
                 createUser: arg.Nick,
                 pwd: String(arg.contrasenia),
                 roles: [
@@ -46,10 +44,9 @@ module.exports = class Users extends Connection {
                 ]
             })
 
-            return {CreacionExitosa: "Usuario creado con rol especificado", usuario: query, cliente: insercion}
+            return insercion
 
         } catch (error) {
-            if (error.code == 13 || error.code == 121 || error.code == 11000) return error.errorResponse
             return error
         }
 
@@ -68,7 +65,7 @@ module.exports = class Users extends Connection {
         try {
             
             this.setCollection = "usuario"
-            let user = await this.collection.findOne({_id : arg})
+            let user = this.findUserById(arg)
             if (!user) throw {Error: 'El usuario que ha ingresado no existe', status: "404"}
             let {users: [rol]} = await this.db.command({
                 usersInfo: {
@@ -194,6 +191,15 @@ module.exports = class Users extends Connection {
             if (error.code == 13 || error.code == 121) return error.errorResponse
             return error
         }
+    }
+
+    async findUserById(arg) {
+
+        this.setCollection = "usuario"
+        let user = await this.collection.findOne({_id : arg})
+
+        return user
+        
     }
 
 }

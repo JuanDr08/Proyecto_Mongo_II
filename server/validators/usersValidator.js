@@ -1,5 +1,4 @@
 const { body, query, param } = require('express-validator');
-const { ObjectId } = require('mongodb');
 
 exports.createValidUserData = () => {
 
@@ -13,6 +12,14 @@ exports.createValidUserData = () => {
         body('contrasenia').notEmpty().withMessage('La contraseña es obligatoria'),
         body('email').isEmail().withMessage('El email no es valido'),
         body('telefono').isNumeric().withMessage('El telefono debe ser un numero')
+    ]
+
+}
+
+exports.searchValidUserIdParam = () => {
+
+    return [
+        param('id').isInt().withMessage("Debe filtrar unicamente por enteros")
     ]
 
 }
