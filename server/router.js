@@ -10,8 +10,10 @@ const {
     existingRoleValidation,
     createValidUserData,
     searchValidUserIdParam,
+    infoPurchaseTicketValidator,
     updateUserRoles,
-    getAllUsersDetails
+    getAllUsersDetails,
+    buyTickets
 } = require('./index')
 
 
@@ -24,5 +26,7 @@ router.get("/user/:id", searchValidUserIdParam(), getUserDetails) // Obtener det
 router.patch("/user/:id", validatePatchUserInfo(), updateUserRoles) // Actualizar los roles de un usuario
 router.get("/users/:rol", existingRoleValidation(), getAllUsersDetails) // Obtener todos los usuarios que tienen un rol especifico
 router.get("/users", emptyBodyForGetRequestsValidation(), getAllUsersDetails) // Obtener todos los usuarios existentes
+
+router.post("/entries", infoPurchaseTicketValidator(), buyTickets)
 
 module.exports = router
