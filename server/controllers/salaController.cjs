@@ -11,7 +11,7 @@ exports.findRoomById = async (req, res) => {
     const DTO = new salasDto();
 
     let idSala = DTO.formatObjectId(req.params.id)
-    let query = salaModel.findOneRoomById(idSala)
+    let query = await salaModel.findOneRoomById({id_sala:idSala})
     let modelResponse = DTO.templateSuccesfullSearch(query)
 
     res.status(modelResponse.status).json(modelResponse)

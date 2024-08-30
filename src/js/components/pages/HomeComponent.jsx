@@ -11,7 +11,6 @@ export async function moviesLoader () {
     
     let prox = data.data.filter(mov => mov.estado == 'proximamente')
     data = data.data.filter(mov => mov.estado == 'en cartelera' || mov.estado == 'estreno')
-    sessionStorage.setItem('tiempo', )
     return {proximamente: prox, data: data}
 }
 
