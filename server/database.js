@@ -6,9 +6,9 @@ module.exports = class Connection {
 
     constructor(){
 
-        if(typeof Connection.instance === 'object') {
+        /* if(typeof Connection.instance === 'object') {
             return Connection.instance;
-        }
+        } */
 
         this.host = process.env.HOST;
         this.user = process.env.MONGOUSER;
@@ -19,9 +19,9 @@ module.exports = class Connection {
         this.#connect();
         this.db = this.conexion.db(process.env.DB_NAME)
 
-        Connection.instance = this;
+        /* Connection.instance = this;
 
-        return this;
+        return this; */
 
     }
 

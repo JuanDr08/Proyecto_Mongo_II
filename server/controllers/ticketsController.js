@@ -2,25 +2,51 @@ const { validationResult } = require('express-validator');
 const Cartelera = require('../model/funcionesModel')
 const ticketsDto = require('../dto/ticketsDto')
 const Entries = require('../model/ticketsModel')
+const Sala = require('../model/salaModel');
+const Users = require('../model/usersModel')
 
 exports.buyTickets = async (req, res) => {
 
     const error = validationResult(req);
-    if(!error.isEmpty()) return res.status(400).json({errors: errors.array()});
+    if(!error.isEmpty()) return res.status(400).json({errors: error.array()});
 
     const carteleraModel = new Cartelera();
     const DTO = new ticketsDto();
     const ticketsModel = new Entries();
-    let data = req.body
-    console.log(data)
+    const salaModel = new Sala();
+    const userModel = new Users();
+    
 
-    req.body.id_funcion = DTO.formatFunctionToHexString(req.body.id_funcion);
-    let functionExists = await carteleraModel.findFunctionById(req.body.id_funcion);
-    if(!functionExists) res.status(404).json({status: 404, msg: `Funcion con id ${req.body.id_funcion} no existe`});
+    data = DTO.formatTicketUserData(req.body);
+    let functionExists = await carteleraModel.findFunctionById(data.id_funcion);
+    if(!functionExists){
+        let response = DTO.templateForAnUnexistingFunction(data.id_funcion)
+        return res.status(response.status).json(response);
+    }
     data.id_sala = functionExists.id_sala;
-    console.log(data)
 
-    let seatsDisponibility = carteleraModel.seatsDisponibility(functionExists, req.body);
-    if (!seatsDisponibility.length) res.status(409).json({status: 409, msg: `El asiento ${req.body.asiento} no se encuentra disponible`})
+    let seatsDisponibility = await carteleraModel.seatsDisponibility(functionExists, data);
+    if (!seatsDisponibility.length){
+        let response = DTO.templateForNotSeatDisponibility(data.asiento)
+        return res.status(response.status).json(response)
+    } 
+    
+    data.subTotal = 14000;
+    let total = data.subTotal;
+
+    let room = await salaModel.findOneRoomById(data);
+    if(data.asiento.toUpperCase().includes(room.filaVip)) total += total * 0.97;
+
+    let isUserVip = await userModel.cardDisponibilityInUser(process.env.PASSWORD);
+    if(isUserVip) total = total * 0.80;
+
+    data.total = total
+    data.cedula_user = Number(process.env.PASSWORD);
+
+    carteleraModel.buyASeat(data)
+    let createTicket = await ticketsModel.buyEntriesToAFunction(data)
+    let succesfull = createTicket.code == 121 ? DTO.templateForAFaildeSchemaValidation(createTicket) : DTO.templateSuccesfullTicketBought(data)
+
+    return res.status(succesfull.status).json(succesfull)
 
 }

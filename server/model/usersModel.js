@@ -96,16 +96,16 @@ module.exports = class Users extends Connection {
             if(arg.tarjeta) {
                 await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {fechaVencimiento: new Date(), estado: "activa"}, rol: "UsuarioVip" }})
 
-                let query = await this.addVipRoleToUser(arg)
-                this.removeEstandarRoleToUser(arg)
+                let query = await this.#addVipRoleToUser(arg)
+                this.#removeEstandarRoleToUser(arg)
 
                 return query
             }
 
             await this.collection.updateOne({_id: arg.cedula}, {$set: {tarjeta: {estado: "inactiva"}, rol: "UsuarioEstandar" }})
 
-            let query = await this.addEstandarRoleToUser(arg)
-            this.removeVipRoleToUser(arg)
+            let query = await this.#addEstandarRoleToUser(arg)
+            this.#removeVipRoleToUser(arg)
 
             return query
 
@@ -114,21 +114,21 @@ module.exports = class Users extends Connection {
         }
     }
 
-    async addVipRoleToUser(arg) {
+    async #addVipRoleToUser(arg) {
         return await this.db.command({
             grantRolesToUser: arg.Nick,
             roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
         })
     }
 
-    async removeVipRoleToUser(arg) {
+    async #removeVipRoleToUser(arg) {
         await this.db.command({
             revokeRolesFromUser: arg.Nick,
             roles: [{ role: "UsuarioVip", db: process.env.DB_NAME }]
         })
     }
 
-    async addEstandarRoleToUser(arg) {
+    async #addEstandarRoleToUser(arg) {
         this.setCollection = "usuario"
         return await this.db.command({
             grantRolesToUser: arg.Nick,
@@ -136,7 +136,7 @@ module.exports = class Users extends Connection {
         })
     }
 
-    async removeEstandarRoleToUser(arg) {
+    async #removeEstandarRoleToUser(arg) {
         this.setCollection = "usuario"
         await this.db.command({
             revokeRolesFromUser: arg.Nick,
@@ -196,6 +196,14 @@ module.exports = class Users extends Connection {
 
         return user
         
+    }
+
+    async cardDisponibilityInUser(arg) {
+
+        this.setCollection = "usuario"
+        let validCard = await this.collection.findOne({_id: Number(arg), tarjeta: {$exists: true}, "tarjeta.estado": "activa"})
+        return validCard
+
     }
 
 }
