@@ -16,6 +16,48 @@ module.exports = class Entries extends Connection {
         return this;
     }
 
+    async findTicektById(arg) {
+
+        try {
+
+            this.setCollection = 'boleto'
+            let query = await this.collection.findOne({_id: arg})
+            return query
+
+        } catch (err) {
+            return err
+        }
+
+    }
+
+    async deleteTicket(arg) {
+
+        try {
+
+            this.setCollection = 'boleto'
+            let query = await this.collection.deleteOne({_id: arg})
+            return query
+
+        } catch (err) {
+            return err
+        }
+
+    }
+
+    async editTicketInfoToBuyTheTicket(id,arg) {
+
+        try {
+
+            this.setCollection = 'boleto'
+            let query = await this.collection.updateOne({_id: id}, {$set: arg})
+            return query
+            
+        } catch (err) {
+            return err
+        }
+
+    }
+
     /**
      * * API para permitir la compra de boletas
      * TODO: Se realiza el registro del boleto en la base de datos

@@ -9,6 +9,14 @@ module.exports = class ticketsDto {
         }
     }
 
+    templateDefaultError(arg) {
+        return {
+            status: 500,
+            message: 'Ha ocurrido un problema durante la compra del ticket',
+            data: arg
+        }
+    }
+
     templateForNotSeatDisponibility(arg) {
         return {
             status: 404,
@@ -32,12 +40,23 @@ module.exports = class ticketsDto {
         }
     }
 
+    templateNotExistingTicket(arg) {
+        return {
+            status: 404,
+            msg: `El ticket de id: ${arg} no fue encontrado o no existe, ingrese uno valido`
+        }
+    }
+
     formatTicketUserData(arg) {
         return {
             id_funcion: ObjectId.createFromHexString(arg.id_funcion),
             asiento: arg.asiento,
             fechaCompra: new Date(arg.fechaCompra)
         }
+    }
+
+    formatFromStringToObjectId(arg) {
+        return ObjectId.createFromHexString(arg)
     }
 
 }

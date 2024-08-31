@@ -13,39 +13,24 @@ exports.buyTickets = async (req, res) => {
     const carteleraModel = new Cartelera();
     const DTO = new ticketsDto();
     const ticketsModel = new Entries();
-    const salaModel = new Sala();
-    const userModel = new Users();
-    
 
-    data = DTO.formatTicketUserData(req.body);
-    let functionExists = await carteleraModel.findFunctionById(data.id_funcion);
-    if(!functionExists){
-        let response = DTO.templateForAnUnexistingFunction(data.id_funcion)
-        return res.status(response.status).json(response);
+    let idTicket = DTO.formatFromStringToObjectId(req.params.id)
+    let ticketInfo = await ticketsModel.findTicektById(idTicket)
+    let ticketSeats = ticketInfo ? ticketInfo.asientos : DTO.templateNotExistingTicket(idTicket)
+    if(ticketSeats.status == 404) return res.status(ticketSeats.status).json(ticketSeats)
+
+    let updateTicket = await ticketsModel.editTicketInfoToBuyTheTicket(idTicket, {estado: 'comprada', fechaCompra: new Date(), total: req.body.total})
+    console.log(updateTicket)
+    let succesfull = updateTicket ? DTO.templateSuccesfullTicketBought(updateTicket) : DTO.templateDefaultError(updateTicket)
+
+    if(succesfull.status == 500) return res.status(succesfull.status).json(succesfull)
+
+    let idFuncion = ticketInfo.id_funcion
+    for(let seat of ticketSeats) {
+        
+        await carteleraModel.buyASeat(idFuncion, seat)
+
     }
-    data.id_sala = functionExists.id_sala;
-
-    let seatsDisponibility = await carteleraModel.seatsDisponibility(functionExists, data);
-    if (!seatsDisponibility.length){
-        let response = DTO.templateForNotSeatDisponibility(data.asiento)
-        return res.status(response.status).json(response)
-    } 
-    
-    data.subTotal = 14000;
-    let total = data.subTotal;
-
-    let room = await salaModel.findOneRoomById(data);
-    if(data.asiento.toUpperCase().includes(room.filaVip)) total += total * 0.97;
-
-    let isUserVip = await userModel.cardDisponibilityInUser(process.env.PASSWORD);
-    if(isUserVip) total = total * 0.80;
-
-    data.total = total
-    data.cedula_user = Number(process.env.PASSWORD);
-
-    carteleraModel.buyASeat(data)
-    let createTicket = await ticketsModel.buyEntriesToAFunction(data)
-    let succesfull = createTicket.code == 121 ? DTO.templateForAFaildeSchemaValidation(createTicket) : DTO.templateSuccesfullTicketBought(data)
 
     return res.status(succesfull.status).json(succesfull)
 

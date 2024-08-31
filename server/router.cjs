@@ -25,7 +25,7 @@ const {
 
 
 router.get("/movies", emptyBodyForGetRequestsValidation() ,listAllMovies) // Listar todas las peliculas
-router.get("/movies/:id", objectIdValidator(), getMovieByID) // Listar una pelicula segun su id
+router.get("/movie/:id", objectIdValidator(), getMovieByID) // Listar una pelicula segun su id
 router.get("/movie/:id/functions", objectIdValidator(), showFunctionsOfAnEspecificMovie)
 
 router.post("/user", createValidUserData(), createUser) // Crear Usuarios
@@ -34,11 +34,11 @@ router.patch("/user/:id", validatePatchUserInfo(), updateUserRoles) // Actualiza
 router.get("/users/:rol", existingRoleValidation(), getAllUsersDetails) // Obtener todos los usuarios que tienen un rol especifico
 router.get("/users", emptyBodyForGetRequestsValidation(), getAllUsersDetails) // Obtener todos los usuarios existentes
 
-router.post("/entries", infoPurchaseTicketValidator(), buyTickets)
+router.post("/ticket/:id", [infoPurchaseTicketValidator(), objectIdValidator()], buyTickets)
 router.get("/room/:id", objectIdValidator(), findRoomById)
 
-router.get("/movies/:id/seats", [ emptyBodyForGetRequestsValidation(), objectIdValidator() ], showSeatsDisponibilityFromAFunction)
-router.post("/movies/:id/seats", [objectIdValidator(), bodyCorrectSeatCodeFormat()], reserveOneSeat)
-router.patch("/movies/:id/seats", [objectIdValidator(), bodyCorrectSeatCodeFormat()], cancelBookedSeat)
+router.get("/movie/:id/seats", [ emptyBodyForGetRequestsValidation(), objectIdValidator() ], showSeatsDisponibilityFromAFunction)
+router.post("/movie/:id/seat", [objectIdValidator(), bodyCorrectSeatCodeFormat()], reserveOneSeat)
+router.delete("/ticket/:id", [objectIdValidator(), emptyBodyForGetRequestsValidation()], cancelBookedSeat)
 
 module.exports = router

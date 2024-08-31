@@ -39,10 +39,10 @@ module.exports = class Cartelera extends Connection {
 
     }
 
-    async buyASeat (arg) {
+    async buyASeat (funcion, asiento) {
 
         this.setCollection = "funcion"
-        this.collection.updateOne({_id: arg.id_funcion, "asientos.codigo": arg.asiento.toUpperCase()}, {$set: {"asientos.$.estado": "comprada"}})
+        this.collection.updateOne({_id: funcion, "asientos.codigo": asiento.toUpperCase()}, {$set: {"asientos.$.estado": "comprada"}})
 
     }
 

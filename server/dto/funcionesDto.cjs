@@ -5,21 +5,22 @@ module.exports = class FuncionesDto {
     templateErrorDefautl(arg) {
         return {
             status: 400,
-            msg: arg
+            msg: 'Fallo en la insercion de los asientos',
+            data: arg
         }
     }
 
-    templateSuccesfullBooking(arg) {
+    templateSuccesfullBooking(arg, ticekt) {
         return {
             status: 200,
             msg: arg
         }
     }
 
-    templateSeatNotAviable(code, arg){
+    templateSeatNotAviable(arg){
         return {
             status: 409,
-            msg: `El asiento ${code} no se encuentra disponible`,
+            msg: `El/Los asientos con los siguientes codigos no se encuentran disponibles`,
             data: arg
         }
     }
@@ -27,7 +28,8 @@ module.exports = class FuncionesDto {
     templateSeatNotFound(arg) {
         return {
             status: 404,
-            msg: `Asiento con el codigo: ${arg} no existe en la sala ingresada`
+            msg: `Los siguientes asientos no se han encontrado existencias en la sala`,
+            data: arg
         }
     }
 
@@ -49,6 +51,13 @@ module.exports = class FuncionesDto {
         return {
             status: 404,
             msg: `La funcion de id: ${arg} no se encuetra disponible`
+        }
+    }
+
+    templateNotExistingTicket(arg) {
+        return {
+            status: 404,
+            msg: `El ticket de id: ${arg} no fue encontrado o no existe, ingrese uno valido`
         }
     }
 
