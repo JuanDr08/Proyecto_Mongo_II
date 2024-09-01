@@ -19,7 +19,8 @@ const {
     reserveOneSeat,
     cancelBookedSeat,
     showFunctionsOfAnEspecificMovie,
-    findRoomById
+    findRoomById,
+    getUserTickets
 } = require('./index.cjs')
 
 
@@ -40,5 +41,6 @@ router.get("/room/:id", objectIdValidator(), findRoomById)
 router.get("/movie/:id/seats", [ emptyBodyForGetRequestsValidation(), objectIdValidator() ], showSeatsDisponibilityFromAFunction)
 router.post("/movie/:id/seat", [objectIdValidator(), bodyCorrectSeatCodeFormat()], reserveOneSeat)
 router.delete("/ticket/:id", [objectIdValidator(), emptyBodyForGetRequestsValidation()], cancelBookedSeat)
+router.get('/user/:id/tickets', searchValidUserIdParam(), getUserTickets)
 
 module.exports = router

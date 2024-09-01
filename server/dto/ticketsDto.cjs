@@ -55,6 +55,20 @@ module.exports = class ticketsDto {
         }
     }
 
+    templateForEmptyTicketsFromUser () {
+        return {
+            status: 404,
+            msg: 'No existen tickets comprados por parte del usuario',
+        }
+    }
+
+    templateForExistingTickets (data) {
+        return {
+            status: 200,
+            data
+        }
+    }
+
     formatFromStringToObjectId(arg) {
         return ObjectId.createFromHexString(arg)
     }
