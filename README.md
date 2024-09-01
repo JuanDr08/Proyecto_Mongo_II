@@ -14,8 +14,8 @@
 
     ```javascript
     HOST="mongodb://"
-    MONGOUSER="Administrador"
-    PASSWORD="1234"
+    VITE_MONGOUSER="Administrador"
+    VITE_PASSWORD="1234"
     CLUSTER="serveo.net"
     PORT="27018"
     DB_NAME="cineCampus"
@@ -324,7 +324,7 @@
       console.log(await user.createNewUser(obj)) // Invocacion del metodo que crea los usuarios, se le pasa como parametro el objeto recien creado
       ```
 
-      - Es importante tener en cuenta que el Nick y la contrasenia registrados serán los que se deberán reemplazar por el MONGOUSER y PASSWORD en el archivo .env respectivamente para poder conectarnos con la cadena de conexion  creada para dichos usuarios
+      - Es importante tener en cuenta que el Nick y la contrasenia registrados serán los que se deberán reemplazar por el VITE_MONGOUSER y VITE_PASSWORD en el archivo .env respectivamente para poder conectarnos con la cadena de conexion  creada para dichos usuarios
 
       - La contrasenia tambien será usado como identificador unico del registro del usuario en su respectiva coleccion
 

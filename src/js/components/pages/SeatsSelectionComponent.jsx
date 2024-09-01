@@ -60,7 +60,7 @@ export const SeatsSelection = () => {
 
     useEffect(() => {
         if (!funcion) return
-        funcion.forEach(({ _id, fecha_init }) => {
+        funcion.forEach(({ _id, fecha_init, id_sala }) => {
             let diaSemana = DAYS[`${new Date(fecha_init).getDay()}`];
             let dia = new Date(fecha_init).getDate()
 
@@ -70,7 +70,8 @@ export const SeatsSelection = () => {
                 dia: dia,
                 hora: [{
                     id: _id,
-                    hora: new Date(fecha_init).getUTCHours() + ':' + new Date(fecha_init).getMinutes()
+                    hora: new Date(fecha_init).getUTCHours() + ':' + new Date(fecha_init).getMinutes(),
+                    id_sala
                 }]
             }
 
@@ -122,7 +123,7 @@ export const SeatsSelection = () => {
     }, [daySelected])
 
     const filtrarFuncionConIdSala = (salaId) => {
-        let funcionConcreta = funcion.filter(({ _id }) => _id === salaId)
+        let funcionConcreta = funcion.filter(({ id_sala }) => id_sala === salaId)
         return funcionConcreta
     }
 
@@ -150,7 +151,7 @@ export const SeatsSelection = () => {
             setHourSelected({ ref: reference, id, hora: hora })
             let [funcionActual] = filtrarFuncionConIdSala(salaId)
             setSalaInfo(funcionActual)
-            return setCurrentSalaDesc([nombreDia, numeroDia, hora, salaId, sala, tipo_sala, fila_vip])
+            return setCurrentSalaDesc([nombreDia, numeroDia, hora, funcionActual._id, sala, tipo_sala, fila_vip])
         }
 
     }
@@ -281,9 +282,9 @@ export const SeatsSelection = () => {
                                         <section className="flex flex-col gap-2 p-[20px]">
                                             {
                                                 asientosSala && Object.entries(asientosSala).map(([fila, asientos]) => (
-                                                    <>
-                                                        <GridSeatsLayout filaVip={currentSalaDesc[6]} asientosSeleccionados={seatSelected} seleccionAsientos={setSeatSelected} key={fila} asientos={asientos} fila={fila} />
-                                                    </>
+                                                    
+                                                    <GridSeatsLayout filaVip={currentSalaDesc[6]} asientosSeleccionados={seatSelected} seleccionAsientos={setSeatSelected} key={fila} asientos={asientos} fila={fila} />
+                                                    
                                                 ))
                                             }
                                         </section>
@@ -314,10 +315,8 @@ export const SeatsSelection = () => {
                                 </div>
                                 <div className="flex gap-[20px]">
                                     {
-                                        horas && horas.map(({ hora, id }) => (
-
-                                            <HoursCard key={id} id={id} hora={hora} setSelected={selectHour} />
-
+                                        horas && horas.map(({ hora, id, id_sala}) => (
+                                            <HoursCard key={id} id={id} sala={id_sala} hora={hora} setSelected={selectHour} />
                                         ))
                                     }
                                 </div>

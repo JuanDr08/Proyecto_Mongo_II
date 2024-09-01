@@ -1,21 +1,20 @@
 import { useRef, useState, useEffect } from "react"
 
 
-export const HoursCard = ({id, hora, setSelected}) => {
+export const HoursCard = ({id, hora, setSelected, sala}) => {
 
     const hourRef = useRef(null)
     hora = `${hora}0`
+    const [salaInfo, setSalaInfo] = useState(null)
     const selectThisElement = (ref) => {
         let reference = ref.current
-        let salaId = salaInfo._id
-        setSelected({reference, id, hora, salaId, tipo_sala: salaInfo.tipo_Sala, sala: salaInfo.nombre, fila_vip: salaInfo.filaVip})
+        setSelected({reference, id, hora, salaId: sala, tipo_sala: salaInfo.tipo_Sala, sala: salaInfo.nombre, fila_vip: salaInfo.filaVip})
     }
 
-    const [salaInfo, setSalaInfo] = useState(null)
 
     useEffect(()=>{
         
-        fetch(`http://localhost:3000/room/${id}`)
+        fetch(`http://localhost:3000/room/${sala}`)
             .then(res => res.json())
             .then(({data}) => setSalaInfo((data)))
         

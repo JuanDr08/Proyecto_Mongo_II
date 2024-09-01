@@ -11,8 +11,8 @@ module.exports = class Connection {
         } */
 
         this.host = process.env.HOST;
-        this.user = process.env.MONGOUSER;
-        this.pass = process.env.PASSWORD;
+        this.user = process.env.VITE_MONGOUSER;
+        this.pass = process.env.VITE_PASSWORD;
         this.cluster = process.env.CLUSTER;
         this.port = process.env.PORT;
     

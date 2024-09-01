@@ -9,8 +9,6 @@ import { useEffect, useState } from "react"
 
 export const loadSeatReserved = async ({ params }) => {
 
-    console.log(params)
-
     let uri = JSON.parse(decodeURIComponent(params.info))
     const { data } = await fetch(`http://localhost:3000/movie/${params.id}`, { cache: "force-cache" }).then(res => res.json())
 
@@ -52,7 +50,7 @@ export const SeatReservationScreen = () => {
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!"
+            text: "Se ha cancelado la reserva ya sea porque el tiempo expiro o saliste de la pantalla de pago"
         });
         return navigate('/')
     }
@@ -66,7 +64,6 @@ export const SeatReservationScreen = () => {
             },
             body: JSON.stringify({ total: uri.total, fechaFuncion: `${uri.diaName.slice(0,3)}, Sep ${uri.dayNum}th 2024`, hora: uri.time, sala: uri.funcion, pelicula: parametros.id })
         })
-        console.log(uri)
         return navigate(`/ticket/${parametros.seatId}`)
 
     }
@@ -90,7 +87,7 @@ export const SeatReservationScreen = () => {
     return (
 
         <>
-            <SectionIndicator to={-1} section={'Order Summary'} />
+            <SectionIndicator to={-1} clickEvent={onFinalizar} section={'Order Summary'} />
 
             <main className="bg-[#0006]">
 

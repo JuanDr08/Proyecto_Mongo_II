@@ -36,8 +36,6 @@ exports.showSeatsDisponibilityFromAFunction = async (req, res) => {
 
 exports.reserveOneSeat = async (req, res) => {
 
-    console.log(req.body)
-
     const error = validationResult(req);
     if(!error.isEmpty()) return res.status(400).json({errors: error.array()});
 
@@ -126,7 +124,6 @@ exports.cancelBookedSeat = async (req, res) => {
     let functionModelResponse = funcion ? funcion.asientos : DTO.templateNonExistingFunction(idTicket) // Verificamos si la funcion fue encontrada, del caso contrario responder con error por no existencia
     if (functionModelResponse.status == 404) return res.status(functionModelResponse.status).json(functionModelResponse);
 
-    console.log(functionModelResponse, ticketInfo, ticketSeats)
     let modelResponse;
     let dtoResponse;
     for (let seat of ticketSeats) {
