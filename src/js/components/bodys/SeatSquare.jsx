@@ -16,7 +16,6 @@ export const SeatSquare = ({ filaVip,asientosSeleccionados, seleccionAsientos, c
     }
 
     const eliminarAsiento = (data) => {
-        console.log(data)
         let newSeatsArr = asientosSeleccionados.filter(val => val.ref != data.ref)
         seleccionAsientos(newSeatsArr)
         data.ref.setAttribute('estado', 'disponible')

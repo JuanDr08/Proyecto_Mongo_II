@@ -3,7 +3,7 @@ import { CastCards } from '../bodys/CastCards.jsx'
 import { CinemaCards } from '../bodys/CinemaCards.jsx'
 import { ButtomFooter } from "../footers/ButtomFooter.jsx"
 import { useState } from "react"
-import { useLoaderData } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 
 export async function movieLoader ({params}) {
 
@@ -82,7 +82,7 @@ export const MoviesDescComponent = () => {
 
             {
                 cinema && (
-                    <ButtomFooter btnText='Book Now' />
+                    <Link to={'seats'}><ButtomFooter btnText='Book Now' /></Link>
                 )
             }
 

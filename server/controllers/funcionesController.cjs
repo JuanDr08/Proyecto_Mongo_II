@@ -43,10 +43,10 @@ exports.reserveOneSeat = async (req, res) => {
     const funcionesModel = new Cartelera();
     const ticketsModel = new Entries();
     
-    let idTicket = DTO.formatFunctionIdToHexString(req.params.id)
+    let idFuncion = DTO.formatFunctionIdToHexString(req.params.id)
     let codigosAsientos = req.body.seatsCode
-    let funcion = await funcionesModel.findFunctionById(idTicket)
-    let functionModelResponse = funcion ? funcion.asientos : DTO.templateNonExistingFunction(idTicket)
+    let funcion = await funcionesModel.findFunctionById(idFuncion)
+    let functionModelResponse = funcion ? funcion.asientos : DTO.templateNonExistingFunction(idFuncion)
     if (functionModelResponse.status == 404) return res.status(functionModelResponse.status).json(functionModelResponse);
 
     let disponible2 = []
@@ -82,7 +82,7 @@ exports.reserveOneSeat = async (req, res) => {
     let dtoResponse
     for (let seat of codigosAsientos) {
         
-        modelResponse = await funcionesModel.reserveSeats({funcion_id: idTicket, seatCode: seat})
+        modelResponse = await funcionesModel.reserveSeats({funcion_id: idFuncion, seatCode: seat})
         dtoResponse = modelResponse.modifiedCount == 1 ? DTO.templateSuccesfullBooking(modelResponse) : DTO.templateErrorDefautl(modelResponse)
         if (dtoResponse.status == 400) break;
         
@@ -92,7 +92,7 @@ exports.reserveOneSeat = async (req, res) => {
     if (dtoResponse.status == 200) {
         tickestReserve = await ticketsModel.buyEntriesToAFunction({
             cedula_user: Number(process.env.VITE_PASSWORD),
-            id_funcion: idTicket,
+            id_funcion: idFuncion,
             id_sala: funcion.id_sala,
             asientos: codigosAsientos,
             fechaReserva: new Date(),

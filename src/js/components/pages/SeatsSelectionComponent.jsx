@@ -1,4 +1,4 @@
-import { useFetcher, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { ButtomFooter } from "../footers/ButtomFooter"
 import { SectionIndicator } from "../headers/SectionIndicator"
 import { GridSeatsLayout } from "../bodys/GridSeatsLayout";
@@ -19,6 +19,8 @@ const DAYS = {
 
 export const SeatsSelection = () => {
 
+    const navigate = useNavigate()
+
     const { id } = useParams(); // Se obtienen los parametros enviados en la url
     const [funcion, setFuncion] = useState(null) // Almacena todas las funciones existentes de la pelicula pasada por url
     const [formatDay, setFormatDay] = useState([]) // Almacena las fechas y horas de las funciones existentes
@@ -33,9 +35,9 @@ export const SeatsSelection = () => {
     const [user, setUser] = useState([])
     const [ticketPrice, setTicketPrice] = useState(0)
 
-    const checkForVipUser = ({Usuario}) => {
+    const checkForVipUser = ({ Usuario }) => {
         if (!Usuario.tarjeta) return false
-        else if(Usuario.tarjeta['estado'] == 'inactiva') return false
+        else if (Usuario.tarjeta['estado'] == 'inactiva') return false
         return true
     }
 
@@ -83,7 +85,7 @@ export const SeatsSelection = () => {
             .then(res => res.json()).then(data => setUser(data.msg))
     }, [])
 
-    
+
     const selectDay = (ref, id) => {
         let { elemento } = daySelected ?? 0
         if (elemento != undefined) {
@@ -120,7 +122,7 @@ export const SeatsSelection = () => {
     }, [daySelected])
 
     const filtrarFuncionConIdSala = (salaId) => {
-        let funcionConcreta = funcion.filter(({_id}) => _id === salaId)
+        let funcionConcreta = funcion.filter(({ _id }) => _id === salaId)
         return funcionConcreta
     }
 
@@ -153,41 +155,35 @@ export const SeatsSelection = () => {
 
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         const asientosPorFila = {};
         const asientos = salaInfo?.asientos
-        console.log(asientos)
         if (!asientos) return
         for (const asiento of asientos) {
             const fila = asiento.codigo[0]
             if (!asientosPorFila[fila]) asientosPorFila[fila] = []
-            asientosPorFila[fila].push({asiento: asiento.codigo, estado: asiento.estado})
+            asientosPorFila[fila].push({ asiento: asiento.codigo, estado: asiento.estado })
         }
-        setAsientosSala(asientosPorFila) 
-    } ,[salaInfo])
-
-    const generarDataParaEnvio = () => {
-
-    }
+        setAsientosSala(asientosPorFila)
+    }, [salaInfo])
 
     useEffect(() => {
         let newArrayCodes = [];
         seatSelected.forEach(val => {
             newArrayCodes.push(val.codigo)
         })
-        console.log(newArrayCodes)
         let copy = currentSalaDesc
 
         if (!newArrayCodes.length && copy.length == 8) {
             copy.pop()
             setCurrentSalaDesc([...copy])
-        }else if (copy.length == 8) {
+        } else if (copy.length == 8) {
             copy.pop()
             setCurrentSalaDesc([...copy, newArrayCodes])
         } else setCurrentSalaDesc([...copy, newArrayCodes])
     }, [seatSelected])
 
-    useEffect(()=>{
+    useEffect(() => {
         let tipoSala = currentSalaDesc[5]
         let filaVip = currentSalaDesc[6]
         let usuario = user
@@ -198,25 +194,40 @@ export const SeatsSelection = () => {
         let catidadTickets = currentSalaDesc[currentSalaDesc.length - 1]
 
         usuario = checkForVipUser(usuario)
-        let descuentoVip = usuario ? 0.20 : 0; 
+        let descuentoVip = usuario ? 0.20 : 0;
         let precioTotal = 0
-        
+
         catidadTickets.forEach(val => {
 
             let precioBoleta = precioBase
 
-            if(val[0] == filaVip) precioBoleta *= (1 - descuentoVip) * 0.97;
+            if (val[0] == filaVip) precioBoleta *= (1 - descuentoVip) * 0.97;
             else precioBoleta *= (1 - descuentoVip);
 
             precioTotal += precioBoleta
 
         })
 
-        console.log(precioTotal)
-
         setTicketPrice(precioTotal)
-
+        console.log(currentSalaDesc)
     }, [currentSalaDesc])
+
+    const generarDataParaEnvio = () => {
+        let asientos = currentSalaDesc[currentSalaDesc.length - 1]
+        let funcionId = currentSalaDesc[3]
+        let obj = {
+            diaName: currentSalaDesc[0],
+            dayNum: currentSalaDesc[1],
+            time: currentSalaDesc[2],
+            sala: currentSalaDesc[4],
+            tipoSala: currentSalaDesc[5],
+            filaVip: currentSalaDesc[6],
+        }
+        let encode = encodeURIComponent(JSON.stringify(obj))
+        console.log(encode)
+        console.log(JSON.parse(decodeURIComponent(encode)))
+        console.log(asientos, funcionId)
+    }
 
     return (
         <>
@@ -257,7 +268,7 @@ export const SeatsSelection = () => {
                                             {
                                                 asientosSala && Object.entries(asientosSala).map(([fila, asientos]) => (
                                                     <>
-                                                        <GridSeatsLayout filaVip={currentSalaDesc[6]} asientosSeleccionados={seatSelected} seleccionAsientos={setSeatSelected} key={fila} asientos={asientos} fila={fila}/>
+                                                        <GridSeatsLayout filaVip={currentSalaDesc[6]} asientosSeleccionados={seatSelected} seleccionAsientos={setSeatSelected} key={fila} asientos={asientos} fila={fila} />
                                                     </>
                                                 ))
                                             }
@@ -305,7 +316,9 @@ export const SeatsSelection = () => {
 
             {
                 hourSelected && (
-                    <ButtomFooter amount={ticketPrice} clasesExtra="h-[200px]" price btnText='Buy ticket' />
+                    <>
+                        {seatSelected.length ? <ButtomFooter enClick={generarDataParaEnvio} tipo='submit' amount={ticketPrice} clasesExtra="h-[200px]" price btnText='Buy ticket' /> : ''}
+                    </>
                 )
             }
 
