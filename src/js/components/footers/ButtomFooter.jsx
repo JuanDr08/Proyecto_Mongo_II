@@ -12,7 +12,7 @@ export const ButtomFooter = ({enClick=false, amount=14000,price=false, btnText, 
                     </div>
                 )
             }
-            <button onClick={enClick} type="submit" className={`${ price ? ' w-[63%]' : 'w-[84%]' } bg-red-600 p-[20px] w-full rounded-xl`}> { btnText } </button>
+            <button  onClick={enClick} type="submit" className={`${ price ? ' max-w-[65%]' : 'max-w-[84%]' } bg-red-600 p-[20px] w-full rounded-xl`}> { btnText } </button>
         </footer>
     )
 

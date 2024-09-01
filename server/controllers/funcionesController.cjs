@@ -36,6 +36,8 @@ exports.showSeatsDisponibilityFromAFunction = async (req, res) => {
 
 exports.reserveOneSeat = async (req, res) => {
 
+    console.log(req.body)
+
     const error = validationResult(req);
     if(!error.isEmpty()) return res.status(400).json({errors: error.array()});
 
@@ -100,7 +102,7 @@ exports.reserveOneSeat = async (req, res) => {
         })
         dtoResponse.ticketGenerado = tickestReserve.insertedId
     }
-    console.log(dtoResponse, tickestReserve)
+    
     return res.status(dtoResponse.status).json(dtoResponse)
 
 }

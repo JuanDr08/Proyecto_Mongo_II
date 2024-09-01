@@ -201,32 +201,46 @@ export const SeatsSelection = () => {
 
             let precioBoleta = precioBase
 
-            if (val[0] == filaVip) precioBoleta *= (1 - descuentoVip) * 0.97;
-            else precioBoleta *= (1 - descuentoVip);
+            if (val[0] == filaVip) {
+                precioBoleta += precioBoleta * 0.97
+                precioBoleta *= (1 - descuentoVip)
+            } else precioBoleta *= (1 - descuentoVip);
 
             precioTotal += precioBoleta
 
         })
 
         setTicketPrice(precioTotal)
-        console.log(currentSalaDesc)
     }, [currentSalaDesc])
 
-    const generarDataParaEnvio = () => {
+    const generarDataParaEnvio = async () => {
         let asientos = currentSalaDesc[currentSalaDesc.length - 1]
         let funcionId = currentSalaDesc[3]
+
         let obj = {
             diaName: currentSalaDesc[0],
             dayNum: currentSalaDesc[1],
             time: currentSalaDesc[2],
-            sala: currentSalaDesc[4],
+            funcion: currentSalaDesc[4],
             tipoSala: currentSalaDesc[5],
             filaVip: currentSalaDesc[6],
+            asientos: currentSalaDesc[currentSalaDesc.length - 1],
+            total: ticketPrice,
+            user: user
         }
         let encode = encodeURIComponent(JSON.stringify(obj))
-        console.log(encode)
-        console.log(JSON.parse(decodeURIComponent(encode)))
-        console.log(asientos, funcionId)
+
+        fetch(`http://localhost:3000/movie/${funcionId}/seat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ seatsCode: asientos })
+        })
+        .then(res => res.json())
+        .then(data => navigate(`/movie/${id}/seat/${data.ticketGenerado}/${encode}`))
+
+
     }
 
     return (
@@ -317,7 +331,7 @@ export const SeatsSelection = () => {
             {
                 hourSelected && (
                     <>
-                        {seatSelected.length ? <ButtomFooter enClick={generarDataParaEnvio} tipo='submit' amount={ticketPrice} clasesExtra="h-[200px]" price btnText='Buy ticket' /> : ''}
+                        {seatSelected.length ? <ButtomFooter enClick={generarDataParaEnvio} tipo='submit' amount={ticketPrice} clasesExtra="h-[160px]" price btnText='Buy ticket' /> : ''}
                     </>
                 )
             }

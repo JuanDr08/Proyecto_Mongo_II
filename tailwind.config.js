@@ -11,7 +11,8 @@ export default {
         'linear': '#272727',
         'footerNav': '#161616',
         'principalBlack': '#121212',
-        'rojoFuerte': '#FE0000'
+        'rojoFuerte': '#FE0000',
+        'letrasGrises': '#ffffff71'
       }
     },
   },
