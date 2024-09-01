@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 
-export const SectionIndicator = ({section}) => {
+export const SectionIndicator = ({section, to}) => {
 
     return (
         <header className="flex sticky top-0 bg-principalBlack w-full h-[100px] justify-between items-center p-[20px] pb-0 pt-[10px]">
-            <Link to={-1}>
+            <Link to={to}>
                 <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 19L5 12L12 5" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

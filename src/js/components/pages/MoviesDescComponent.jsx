@@ -35,7 +35,7 @@ export const MoviesDescComponent = () => {
 
         <>
 
-            <SectionIndicator section="Cinema Selection" />
+            <SectionIndicator to={-1} section="Cinema Selection" />
 
             <main className="p-[15px] pt-0 ">
 

@@ -64,10 +64,10 @@ export const SeatReservationScreen = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ total: uri.total })
+            body: JSON.stringify({ total: uri.total, fechaFuncion: `${uri.diaName.slice(0,3)}, Sep ${uri.dayNum}th 2024`, hora: uri.time, sala: uri.funcion, pelicula: parametros.id })
         })
-
-        return navigate(`/ticket/${params.seatId}`)
+        console.log(uri)
+        return navigate(`/ticket/${parametros.seatId}`)
 
     }
 
@@ -90,7 +90,7 @@ export const SeatReservationScreen = () => {
     return (
 
         <>
-            <SectionIndicator section={'Order Summary'} />
+            <SectionIndicator to={-1} section={'Order Summary'} />
 
             <main className="bg-[#0006]">
 

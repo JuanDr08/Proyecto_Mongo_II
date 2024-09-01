@@ -14,7 +14,8 @@ const {
 } = require('./controllers/usersController.cjs')
 const {
     buyTickets,
-    getUserTickets
+    getUserTickets,
+    getEspecificTicket
 } = require('./controllers/ticketsController.cjs');
 const {
     showSeatsDisponibilityFromAFunction,
@@ -70,6 +71,7 @@ module.exports = {
     showFunctionsOfAnEspecificMovie,
     findRoomById,
     getUserTickets,
+    getEspecificTicket,
     // models
     Entries,
     Users,

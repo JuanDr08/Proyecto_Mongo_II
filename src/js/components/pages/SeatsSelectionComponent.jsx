@@ -245,7 +245,7 @@ export const SeatsSelection = () => {
 
     return (
         <>
-            <SectionIndicator section='Choose seat' />
+            <SectionIndicator to={-1} section='Choose seat' />
 
             <main className="flex flex-col gap-[20px]">
                 {
