@@ -98,7 +98,7 @@ export const HomeComponent = () => {
                 <section className='flex flex-col gap-[20px] p-[20px]'>
                     <div className='flex text-xl justify-between'>
                         <strong>Coming soon</strong>
-                        <a href="/" className='text-red-500'>See all</a>
+                        <Link to={'/incoming'} className='text-rojoFuerte'>See all</Link>
                     </div>
                     
                     <div className='flex flex-col justify-center items-center gap-[15px]  mb-[100px]'>

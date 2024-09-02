@@ -11,7 +11,6 @@ export async function currentMoviesLoader () {
 export const AllCurrentMovies = () => {
 
     const data = useLoaderData();
-    console.log(data)
 
     return (
         <>
@@ -21,16 +20,18 @@ export const AllCurrentMovies = () => {
                 <section className="flex flex-col gap-[20px]">
                 {
                     data.map(({_id, titulo, poster, genero, estado}) => (
-                        <div className="flex flex-col justify-center text-center">
+                        <div className="flex flex-col gap-[10px] justify-center text-center">
                             <CardsCarrusel 
                             key={_id} 
                             id={_id} 
                             title={titulo} 
                             poster={poster}
                             />
-                            <p><strong>{titulo}</strong></p>
-                            <p>{genero}</p>
-                            <p className="text-letrasGrises"><small>{estado}</small></p>
+                            <div>
+                                <p><strong>{titulo}</strong></p>
+                                <p>{genero}</p>
+                                <p className="text-letrasGrises"><small>{estado}</small></p>
+                            </div>
                         </div>
                     ))
                 }
