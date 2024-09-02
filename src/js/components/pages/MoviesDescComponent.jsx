@@ -7,7 +7,7 @@ import { Link, useLoaderData } from "react-router-dom"
 
 export async function movieLoader ({params}) {
 
-    const data = await fetch(`http://localhost:3000/movie/${params.id}`, {cache: "force-cache"})
+    const data = await fetch(`http://localhost:3000/movie/${params.id}`)
     
     return data
 
@@ -76,7 +76,7 @@ export const MoviesDescComponent = () => {
                         }
                     </div>
 
-                    <p className="mb-[10px]"><strong>Cinema</strong></p>
+                    <p className="my-[10px]"><strong>Cinema</strong></p>
 
                     <div className="flex flex-col gap-[15px]">
                         <CinemaCards changeCinema={selectCinema} />

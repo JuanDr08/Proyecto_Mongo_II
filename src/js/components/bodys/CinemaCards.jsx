@@ -14,7 +14,7 @@ export const CinemaCards = ({changeCinema}) => {
                 <p className="text-semiWhite"><small>Centro Comercial Cacique, piso 4  </small></p>
             </section>
 
-            <img className="w-[50px] rounded-xl" src="https://unavatar.io/pheralb" alt="cinecampus logo"/>
+            <img className="w-[50px] rounded-xl" src="https://khc-sistema-v2.s3.amazonaws.com/configuracion/375135439663569d62efa38.685840480.192423001714776534.png" alt="cinecampus logo"/>
 
         </div>
 

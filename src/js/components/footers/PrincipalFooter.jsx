@@ -4,7 +4,7 @@ export const FooterNavBar = ({ home=true, ticket=false, profile=false,click=fals
 
     return (
 
-        <footer className="flex w-full bottom-0 fixed rounded-2xl border border-semiWhite justify-center items-center h-[100px] bg-footerNav">
+        <footer className="flex w-full bottom-0 fixed z-10 rounded-2xl border border-semiWhite justify-center items-center h-[100px] bg-footerNav">
             <nav className="w-full">
                 <ul className="flex justify-evenly gap-[10px] ">
                     <li><Link to={'/'} className="flex flex-col items-center">

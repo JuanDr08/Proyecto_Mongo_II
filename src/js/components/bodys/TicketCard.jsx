@@ -35,7 +35,7 @@ export const TicketCard = ({ fechaFuncion, hora, sala, total, asientos, _id, pel
                                     <p className="text-xl"><strong>Cine Campus</strong></p>
                                 </div>
                                 <div className=" w-[50px] h-[50px] ">
-                                    <img className=" rounded-lg w-full h-full object-cover " src="https://unavatar.io/pheralb" alt="unavatar" />
+                                    <img className=" rounded-lg w-full h-full object-cover " src="https://khc-sistema-v2.s3.amazonaws.com/configuracion/375135439663569d62efa38.685840480.192423001714776534.png" alt="CineCampus" />
                                 </div>
                             </div>
                             <div className="flex flex-col justify-between w-full gap-[20px]">
