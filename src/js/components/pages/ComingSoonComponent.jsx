@@ -13,7 +13,6 @@ export async function comingSoonMoviesLoader () {
 export const ComingSoon = () => {
 
     const data = useLoaderData()
-    console.log(data)
 
     return (
 

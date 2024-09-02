@@ -31,6 +31,8 @@ export const MoviesDescComponent = () => {
 
     }
 
+    const [trailer, setTrailer] = useState(false)
+
     return (
 
         <>
@@ -40,7 +42,11 @@ export const MoviesDescComponent = () => {
             <main className="p-[15px] pt-0 ">
 
                 <section className="w-full h-[250px]">
-                    <img className="w-[100%] h-[100%] object-cover object-[center_25%] rounded-2xl" src={`https://${data.poster}`} alt={`${data.titulo}`} />
+                    {
+                        trailer ?
+                        <iframe className="w-full h-[100%]" src={`https://www.youtube.com/embed/${data.trailer}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullscreen></iframe> 
+                        : <img className="w-[100%] h-[100%] object-cover object-[center_25%] rounded-2xl" src={`https://${data.poster}`} alt={`${data.titulo}`} />
+                    }
                 </section>
 
                 <section className="tracking-wider text-[80%] flex flex-col gap-[10px] w-full p-[10px] " >
@@ -49,7 +55,7 @@ export const MoviesDescComponent = () => {
                             <p><strong> { data.titulo } </strong></p>
                             <p><small> { data.genero } </small></p>
                         </div>
-                        <button className=" flex items-center self-start justify-center gap-3 p-[8px] bg-red-600 rounded-xl " >
+                        <button onClick={()=>setTrailer(!trailer)} className=" flex items-center self-start justify-center gap-3 p-[8px] bg-red-600 rounded-xl " >
                             <svg width="15" height="15" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 6L0.75 11.1962L0.750001 0.803847L9 6Z" fill="white" />
                             </svg>

@@ -19,6 +19,8 @@ export const HomeComponent = () => {
     const fullData = useLoaderData();
     const {proximamente} = fullData
     const {data} = fullData;
+    const [activeModal, setActiveModal] = useState(false)
+    const inputRef = useRef(null)
     
     const [ movie, setMovie ] = useState({title: "puss in boots the last...", gender: "Adventure"})
     
@@ -43,9 +45,14 @@ export const HomeComponent = () => {
         });
     }, [activeIndex, data]);
 
+    const goToBrowse = () => {
+        inputRef.current.focus()
+        setActiveModal(true)
+    }
+    
     return (
         <>
-            <NavBar name={import.meta.env.VITE_MONGOUSER}/>
+            <NavBar ref={inputRef} estado={activeModal} setEstado={setActiveModal} data={data} name={import.meta.env.VITE_MONGOUSER}/>
             
             <main className='w-full'>
                 <section className='flex text-xl justify-between p-[20px]'>
@@ -53,7 +60,7 @@ export const HomeComponent = () => {
                     <Link to={'/current'} className='text-rojoFuerte'>See all</Link>
                 </section>
 
-                <div className='my-[10px] flex max-w-full overflow-x-hidden relative'>
+                <div className={`${activeModal && 'z-[-1]'} my-[10px] flex max-w-full overflow-x-hidden relative`}>
                     <div className='flex gap-[20px] ml-[120px] justify-center transition-transform duration-300 ' ref={carouselRef}>
                     {
                         data.map(({_id, title, poster}, index) => {
@@ -112,7 +119,7 @@ export const HomeComponent = () => {
                 </section>
             </main>
 
-            <FooterNavBar />
+            <FooterNavBar click={goToBrowse}/>
         </>
     )
 

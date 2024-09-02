@@ -30,6 +30,6 @@ exports.getMovieByID = async (req, res) => { // Logica para listar una pelicula 
     let data = (query) ? DTO.templateFoundMoviesOnDB(query) : DTO.templateEmptyDataInDatabase();
     
 
-    res.status(data.status).json(data);
+    return res.status(data.status).json(data);
 
 }
