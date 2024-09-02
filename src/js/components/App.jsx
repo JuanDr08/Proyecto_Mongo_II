@@ -6,6 +6,8 @@ import { TicketComponent, loader } from './pages/TicketComponent.jsx'
 import { UserTickets, loader as ticketLoader } from './pages/UserTicketsComponent.jsx'
 import { AllCurrentMovies, currentMoviesLoader } from './pages/SeeAllCurrentMoviesComponent.jsx'
 import { ComingSoon, comingSoonMoviesLoader } from './pages/ComingSoonComponent.jsx'
+import { ProfileView, userLoader } from './pages/ProfileComponent.jsx'
+
 import {
     createBrowserRouter,
     RouterProvider
@@ -50,6 +52,11 @@ const router = createBrowserRouter([
         path: '/incoming',
         element: <ComingSoon />,
         loader: comingSoonMoviesLoader
+    },
+    {
+        path: '/profile',
+        element: <ProfileView />,
+        loader: userLoader
     }
 ])
 
