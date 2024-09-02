@@ -33,7 +33,7 @@ export const HomeComponent = () => {
         setActiveIndex(newIndex);
 
         if (carouselRef.current) {
-            carouselRef.current.style.transform = `translateX(-${newIndex * 272}px)`; 
+            carouselRef.current.style.transform = `translateX(-${newIndex * 275}px)`; 
         }
     };
 

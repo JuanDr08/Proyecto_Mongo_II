@@ -6,6 +6,18 @@
 
 ------
 
+# Instalaciones
+
+- Nada mas clonar el repo, debemos seleccionar la version de node que usemos, el proyecto fue construido en la version 20.17 por lo que para mayor compatibilidad se recomienda usar la misma
+
+  ```
+  npm i
+  ```
+
+- Esto instalará las dependencias necesarias para poder correr el repo
+
+
+
 ## Como empezar?
 
 - Primero que nada, una vez instaladas las dependencias del repo deberemos asignar las respectivas variables de entorno y modificar el nombre del archivo .env.template --> .env
@@ -19,6 +31,10 @@
     CLUSTER="serveo.net"
     PORT="27018"
     DB_NAME="cineCampus"
+    
+    EXPRESS_PORT_BACKEND=3000
+    VITE_PORT_FRONTEND=5173
+    VITE_HOST="localhost"
     ```
 
   - El usuario de mongo y la contraseña iran cambiando a medida que  creemos usuarios y queramos trabajar con ellos
@@ -32,15 +48,39 @@
 - Una vez hecho todo esto podremos lanzar el programa corriendo el siguiente comando
 
   ```javascript
-  npm start
+  npm start --> Backend
+  npm run dev --> Frontend
   ```
 
 - De este modo ya tendremos corriendo nuestro programa conectado a la base de datos que hayamos usado
 
 > [!IMPORTANT]
 >
+> - Por temas de tiempo no se pudo implementar un sistema de login de usuarios, por lo que si queremos switchear entre usuarios deberemos hacerlo cambiando las variables de entorno y re lanzando el proyecto
+> - La creacion de usuarios y edicion de usuarios tampoco fue desarrollada en el frontend, por lo que si se quiere crear un usuario debe hacerse desde la API directamente
 > - Cada que cambiemos de variables, ya sea por un cambio de usuario o lo que sea deberemos reiniciar el programa, es decir, volver a ejecutar el comando antes mencionado, de lo contrario se le presentarán problemas
-> - Cada que llamemos a un metodo de algunas de las clases que vayamos a utilizar dependiendo del caso de uso, deberá ser llamado dentro de un console.log para poder observar los resultados
+> - La API completa puede ser consumida sin problemas desde una interfaz como postman, insomnia o thunder client
+
+# Endpoints
+
+```javascript
+GET 'http://localhost:3000/movies' --> Lista las peliculas disponibles
+GET 'http://localhost:3000/movie/:id' --> Lista los detalles de una pelicula especifica
+GET 'http://localhost:3000/movie/:id/functions' --> Lista todas las funciones que reproduciran una misma funcion
+POST'http://localhost:3000/user' --> Crear un usuario
+GET 'http://localhost:3000/user/:id' --> Lista los detalles de un usuario especifico
+PATCH 'http://localhost:3000/user/:id' --> Actualizar los roles de un usuario
+GET 'http://localhost:3000/:rol' --> Todos los usuarios que tienen un rol especifico
+GET 'http://localhost:3000/users' --> Listar a todos los usuarios
+
+POST 'http://localhost:3000/ticket/:id' --> Compra de un ticket en estado de reserva
+GET 'http://localhost:3000/room/:id' --> Busca una sala segun su id
+GET 'http://localhost:3000/movie/:id/seats' --> Lista todos los asientos disponibles de una funcion
+POST 'http://localhost:3000/movie/:id/seat' --> Reservar un asiento
+DELETE 'http://localhost:3000/ticket/:id' --> eliminar la reserva
+GET 'http://localhost:3000/user/:id/tickets' --> todos los tickets comprados por un usuario
+GET 'http://localhost:3000/ticket/:id' --> ticket segun su id
+```
 
 
 
@@ -59,7 +99,7 @@
   - Para usar estos metodos deberemos escribir el main de la siguiente forma
 
     - ##### Listar las peliculas en cartelera
-  
+
       ```javascript
       let pelicula = new m.Movies(); // la forma de importacion requiere llamar primero 'm' y despues el metodo
       
@@ -69,7 +109,7 @@
       - Una vez ejecutado este comando deberia ver en consola un arreglo de objetos con los detalles de todas las peliculas en cartelera
 
     - ##### Listar los detalles de una pelicula especifica
-  
+
       ```javascript
       let pelicula = new m.Movies();
       
@@ -79,13 +119,13 @@
       - Una vez ejecutado deberia poder observar en la consola un objeto con los detalles de la pelicula
 
       - Dado el caso de que el id de la pelicula que ingreso no exista, el programa deberia mostrarle en consola un objeto como este
-  
+
         ```javascript
         {
         	error: "El id ingresado es invalido, recuerde que debe ser un ObjectId existente"
         }
         ```
-  
+
     
     - Eso seria el proceso para completar con exito los casos de uso 1 y 2
 
