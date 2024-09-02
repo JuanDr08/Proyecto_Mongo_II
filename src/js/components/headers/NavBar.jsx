@@ -77,8 +77,8 @@ export const NavBar = forwardRef(({ estado, setEstado, data, name, img },ref) =>
                         <div className=" flex flex-col z-1 absolute w-full bg-[#222] p-[10px] gap-[15px] rounded-xl">
                             {
                                 filteredMovies.map(({ _id, titulo, genero, poster }) => (
-                                    <Link to={`/movie/${_id}`}>
-                                        <div key={_id} className="flex gap-[10px] items-center" >
+                                    <Link key={_id} to={`/movie/${_id}`}>
+                                        <div className="flex gap-[10px] items-center" >
                                             <img className="w-[100px] h-[100px] object-cover rounded-xl" src={`https://${poster}`} alt={titulo} />
                                             <div>
                                                 <p><strong>{titulo}</strong></p>

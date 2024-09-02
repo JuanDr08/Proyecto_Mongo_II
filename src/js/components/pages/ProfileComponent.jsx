@@ -12,7 +12,6 @@ export const userLoader = async () => {
 export const ProfileView = () => {
 
     const { Usuario } = useLoaderData()
-    console.log(Usuario)
 
     return (
         <>

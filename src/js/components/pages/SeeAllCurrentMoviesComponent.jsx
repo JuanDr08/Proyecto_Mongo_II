@@ -20,9 +20,8 @@ export const AllCurrentMovies = () => {
                 <section className="flex flex-col gap-[20px]">
                 {
                     data.map(({_id, titulo, poster, genero, estado}) => (
-                        <div className="flex flex-col gap-[10px] justify-center text-center">
+                        <div key={_id}  className="flex flex-col gap-[10px] justify-center text-center">
                             <CardsCarrusel 
-                            key={_id} 
                             id={_id} 
                             title={titulo} 
                             poster={poster}

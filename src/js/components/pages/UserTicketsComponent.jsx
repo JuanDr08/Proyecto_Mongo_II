@@ -23,7 +23,7 @@ export const UserTickets = () => {
                     data.status != 404 ? (
                         <>
                             {
-                                data.data.map(ticket => <TicketCard {...ticket}/>)
+                                data.data.map(ticket => <TicketCard key={ticket._id} {...ticket}/>)
                             }
                         </>
                     ) : <p>No existen tickets comprados</p>

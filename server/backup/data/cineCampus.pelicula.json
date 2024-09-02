@@ -2,14 +2,33 @@
   "_id": {
     "$oid": "66a80379a5aad36c22a20c80"
   },
-  "titulo": "Duna",
-  "genero": "Ciencia ficción",
+  "titulo": "Puss in boots: The last wish",
+  "genero": "Action",
   "duracion": 155,
-  "sinopsis": "En un futuro lejano, Paul Atreides debe viajar al planeta más peligroso del universo para asegurar el futuro de su familia y su gente.",
+  "sinopsis": "El Gato con Botas descubre que, debido a su pasión por la aventura, ha gastado ya 8 de sus 9 vidas. Por tanto, emprende un peligroso viaje en busca del legendario Último Deseo para solicitar que le restauren las vidas que ya perdió.",
   "estado": "en cartelera",
   "fecha": {
     "$date": "2024-07-15T00:00:00.000Z"
-  }
+  },
+  "poster": "m.media-amazon.com/images/M/MV5BNjMyMDBjMGUtNDUzZi00N2MwLTg1MjItZTk2MDE1OTZmNTYxXkEyXkFqcGdeQXVyMTQ5NjA0NDM0._V1_.jpg",
+  "cast": [
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTlfOeOsUVtrlcd4BZ9TEvgyiyRJqeM7jVjg0kGVrg24kZGToD",
+      "name": "Antonio Banderas",
+      "rol": "El gato con botas"
+    },
+    {
+      "img": "encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS17E1erGJcHAagijfsHzokkrjUXDDHunL_n4Wcn2WJ9FC-Bm-c",
+      "name": "Wagner Moura",
+      "rol": "La muerte"
+    },
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWI6ePR8jkzlfQ4skx-sS1LZ1-doYodvXEIQ&s",
+      "name": "Salma Hayek",
+      "rol": "Kitty patitas suaves"
+    }
+  ],
+  "trailer": "QaiUm8jNiCk"
 },
 {
   "_id": {
@@ -22,7 +41,8 @@
   "estado": "proximamente",
   "fecha": {
     "$date": "2024-12-20T00:00:00.000Z"
-  }
+  },
+  "poster": "m.media-amazon.com/images/M/MV5BNjU3N2QxNzYtMjk1NC00MTc4LTk1NTQtMmUxNTljM2I0NDA5XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg"
 },
 {
   "_id": {
@@ -35,7 +55,26 @@
   "estado": "en cartelera",
   "fecha": {
     "$date": "2024-07-22T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTfOPvTCrmX0EuiGroTqe9LLzcEydUYIVnwccLCK7G_qtt5pInS",
+      "name": "Cillian Murphy",
+      "rol": "Oppenheimer"
+    },
+    {
+      "img": "encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTm4ywk7qTpdllQ2XPFSXEYBEXo1qHPIDnz8kKpKODJadpBIJD4",
+      "name": "Emily Blunt",
+      "rol": "Kitty"
+    },
+    {
+      "img": "encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRVnkJcLs_J2UHryaszAp2IJirxb2KisG-g4Ox--RRCDKKvnToS4PvFjZHJTaRCMrrjbcLLczAB4Zl3B5I",
+      "name": "Matt Damon",
+      "rol": "Leslie Groves"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg",
+  "trailer": "gMPEbJQun68"
 },
 {
   "_id": {
@@ -61,7 +100,26 @@
   "estado": "estreno",
   "fecha": {
     "$date": "2024-07-20T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcR3roUCFsKwrG07nLOYegVwt9jbknRQwbfaI6BenvMNVv82ef_VA1yu6F8Ez6YPtSh0X79jkSpljkwLfIs",
+      "name": "Leah Lewis",
+      "rol": "Ember"
+    },
+    {
+      "img": "encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS7aVvl_STg4gBZrx45_eMRIKHVcDt9dzdpr7kRIQjOVAKI5her",
+      "name": "Mamoudou Athie",
+      "rol": "Wade"
+    },
+    {
+      "img": "encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRYE3Q7zrx157jex7rDpa1aNXpcPULZ7gwqTmy-Psk_q5icNDCb",
+      "name": "Ronnie Del Carmen",
+      "rol": "Bernie"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BNjU2MjE1OGItZjdmYS00ZmIyLTljNjYtOWI5ZGRkZjM4NDEwXkEyXkFqcGc@._V1_.jpg",
+  "trailer": "Rp20svf0qpA"
 },
 {
   "_id": {
@@ -74,7 +132,26 @@
   "estado": "en cartelera",
   "fecha": {
     "$date": "2024-07-22T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRr6lJpq-tarMCLTAgZkPcJPd8mPzENcJ296PTMPH-7_XMYrX4h",
+      "name": "Damian Chapa",
+      "rol": "Kilo"
+    },
+    {
+      "img": "encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTHUL_THndqZzwagwIKE9rNdloq3efuhGfXWxwmX_LbgoJBaplwTpqSrvrZpGqMgipLmggW_1hhFvJmQaA",
+      "name": "Sal Lopez",
+      "rol": "Loco"
+    },
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1KURwHUXyLDynE5y7Ry-ul8C21xGTYEY8tdcmcThsgofr-PH",
+      "name": "Emilio Rivera",
+      "rol": "Rudy"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BMTI2MjI4NTgyNF5BMl5BanBnXkFtZTcwOTM5NzQ5MQ@@._V1_.jpg",
+  "trailer": "iOyQx7MXaz0"
 },
 {
   "_id": {
@@ -147,7 +224,26 @@
   "estado": "estreno",
   "fecha": {
     "$date": "2024-07-29T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnl7cRff63kC06b4vza42Aw_UJ1SQsqwlMqWQ9_uAXIX5QP8-F",
+      "name": "Jaime Vadell",
+      "rol": "El conde"
+    },
+    {
+      "img": "encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ9LIZuCR0gNRK4TH8Z8lrRenrKRSBPWe-A_0eajl9CaEtiRe0w",
+      "name": "Gloria Munchmeyer",
+      "rol": "Lucia"
+    },
+    {
+      "img": "encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSgEkjOsn1eDRIuh45gH-Kxc7RahHFC-sFbzKgVLzDhZwB6GJz4",
+      "name": "Alfredo Castro",
+      "rol": "Fyodor"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BZDRmNmJlMzYtYWJjNC00ZWMzLWE1MzAtZDI1NzE0ZTIzMjkyXkEyXkFqcGdeQXVyMTI4NjE0MTU2._V1_.jpg",
+  "trailer": "K2TMxJpSjpg"
 },
 {
   "_id": {
@@ -160,7 +256,26 @@
   "estado": "estreno",
   "fecha": {
     "$date": "2024-07-27T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT7cOVRwz9nSmJPRgUbDR1gnGC3Eju0y_2HwH_71Czh_nA6eSpG",
+      "name": "Leonardo DiCaprio",
+      "rol": "Ernest Burkhart"
+    },
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeLFH1fW3TwUn-ZtLKwbxL37rrGo_S2BeqYKMPiyEl0TYsrbnL",
+      "name": "Robert De Niro",
+      "rol": "William Hale"
+    },
+    {
+      "img": "encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcShp1tOJ36XZ5uFFOknIlHzc6fxP4HiUfE29tpOErSHQbED1iFQ",
+      "name": "Lily Gladstone",
+      "rol": "Mollie Burkhart"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BMjE4ZTZlNDAtM2Q3YS00YjFhLThjN2UtODg2ZGNlN2E2MWU2XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
+  "trailer": "ShmjZIzfgN4"
 },
 {
   "_id": {
@@ -173,7 +288,26 @@
   "estado": "en cartelera",
   "fecha": {
     "$date": "2024-07-20T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbxffKBZDNZj32qV2vwr2DvJX1DU5Ab1ttUhOhqyQaaAKFfZzb",
+      "name": "Timothée Chalamet",
+      "rol": "Willy Wonka"
+    },
+    {
+      "img": "ichef.bbci.co.uk/news/480/cpsprodpb/16D70/production/_130525539_mediaitem130525538.jpg.webp",
+      "name": "Gustave Die",
+      "rol": "Ship's Engineer"
+    },
+    {
+      "img": "encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS8uhzmythGIf55lptWPzzWDyD6Gw-3X38Za-VtDNSboO9VcSVr",
+      "name": "Murray McArthur",
+      "rol": "Ship's Captain"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BNDM4NTk0NjktZDJhMi00MmFmLTliMzEtN2RkZDY2OTNiMDgzXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
+  "trailer": "LiILH5WOAAk"
 },
 {
   "_id": {
@@ -186,7 +320,26 @@
   "estado": "estreno",
   "fecha": {
     "$date": "2024-07-25T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQrzR9eEhXAn_Lu0LwaKEYnkrf5xoeENcnyX54lPft16BPGKz2Q",
+      "name": "Michael Fassbender",
+      "rol": "The Killer"
+    },
+    {
+      "img": "encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT2XukgGUr0wBSUq-ARtLLCZtDQ-VYZmSZedlztbA726B9HG9s1",
+      "name": "Tilda Swinton",
+      "rol": "The Expert"
+    },
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_7TeuuIjkFllRkj53EgtpFUwFmVtBJimmIw&s",
+      "name": "Charles Parnell",
+      "rol": "The Lawyer - Hodges"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BZGJkMDUwZWQtYTMzMS00NTg5LWE1ZTYtOTVhMDI4NGI1YjMyXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg",
+  "trailer": "5S7FR_HCg9g"
 },
 {
   "_id": {
@@ -199,7 +352,26 @@
   "estado": "estreno",
   "fecha": {
     "$date": "2024-07-23T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbxffKBZDNZj32qV2vwr2DvJX1DU5Ab1ttUhOhqyQaaAKFfZzb",
+      "name": "Timothée Chalamet",
+      "rol": "Paul Atreides"
+    },
+    {
+      "img": "encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQr_o9srG0oxgqnu3ZBy9mBqmVzE9CAZycNP90EzYj09V-Qbrzv",
+      "name": "Zendaya",
+      "rol": "Chani"
+    },
+    {
+      "img": "encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQPSwZyA7SA3YBireC58d65a5yv14UGy3k9l4tiIZsxsn4aQqRi",
+      "name": "Rebecca Ferguson",
+      "rol": "Jessica"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BNTc0YmQxMjEtODI5MC00NjFiLTlkMWUtOGQ5NjFmYWUyZGJhXkEyXkFqcGc@._V1_.jpg",
+  "trailer": "Way9Dexny3w"
 },
 {
   "_id": {
@@ -212,7 +384,26 @@
   "estado": "en cartelera",
   "fecha": {
     "$date": "2024-07-20T00:00:00.000Z"
-  }
+  },
+  "cast": [
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJZ89wjIfbgx1t4Z7Y_fsaYxXCdbrXCG3WinU4iaJA3GRCsmwZ",
+      "name": "Jason Momoa",
+      "rol": "Arthur"
+    },
+    {
+      "img": "encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQs3K21RURZrlzWONSA-5GluAL1ffzQjOpmPg9qIf4b1i1O-xm",
+      "name": "Patrick Wilson",
+      "rol": "Orm"
+    },
+    {
+      "img": "encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQzEwSB9K5D4jH41bCVRsyf3bA5_lHXGvs-CegfniIJ-PFNYxjf",
+      "name": "Yahya Abdul-Mateen II",
+      "rol": "Black Mantha"
+    }
+  ],
+  "poster": "m.media-amazon.com/images/M/MV5BYjQ1ZTUzMWMtY2VkNS00ZDRjLWEwODYtYmFkMWJiNTQxMDUzXkEyXkFqcGc@._V1_.jpg",
+  "trailer": "UGc5Tzz19UY"
 },
 {
   "_id": {
@@ -225,7 +416,8 @@
   "estado": "proximamente",
   "fecha": {
     "$date": "2024-10-10T00:00:00.000Z"
-  }
+  },
+  "poster": "m.media-amazon.com/images/M/MV5BM2U2YWU5NWMtOGI2Ni00MGMwLWFkNjItMjgyZWMxNjllNTMzXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg"
 },
 {
   "_id": {
@@ -238,7 +430,8 @@
   "estado": "proximamente",
   "fecha": {
     "$date": "2024-09-20T00:00:00.000Z"
-  }
+  },
+  "poster": "m.media-amazon.com/images/M/MV5BNDIwNWQwYTktZGQwYS00NzNjLThhNDMtODBlYmI5N2E0NjM0XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg"
 },
 {
   "_id": {
@@ -250,8 +443,9 @@
   "sinopsis": "Años antes de convertirse en el tiránico presidente de Panem, el joven Coriolanus Snow ve una oportunidad de cambiar su destino cuando es elegido como mentor de Lucy Gray Baird, la chica tributo del empobrecido Distrito 12.",
   "estado": "proximamente",
   "fecha": {
-    "$date": "2023-11-17T00:00:00.000Z"
-  }
+    "$date": "2024-11-17T00:00:00.000Z"
+  },
+  "poster": "m.media-amazon.com/images/M/MV5BOTZmMmY2MzctMjU2Yy00YjJlLTk1NjAtY2U4MmMxOWZkZWY4XkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_.jpg"
 },
 {
   "_id": {
@@ -264,5 +458,6 @@
   "estado": "proximamente",
   "fecha": {
     "$date": "2024-12-14T00:00:00.000Z"
-  }
+  },
+  "poster": "m.media-amazon.com/images/M/MV5BNTQ2YTg0MmYtZTMxNy00Zjg4LTk0MjUtZmJkYTQ0ZTg3MDA5XkEyXkFqcGc@._V1_.jpg"
 }]

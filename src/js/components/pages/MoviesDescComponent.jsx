@@ -44,7 +44,7 @@ export const MoviesDescComponent = () => {
                 <section className="w-full h-[250px]">
                     {
                         trailer ?
-                        <iframe className="w-full h-[100%]" src={`https://www.youtube.com/embed/${data.trailer}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullscreen></iframe> 
+                        <iframe className="w-full h-[100%]" src={`https://www.youtube.com/embed/${data.trailer}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe> 
                         : <img className="w-[100%] h-[100%] object-cover object-[center_25%] rounded-2xl" src={`https://${data.poster}`} alt={`${data.titulo}`} />
                     }
                 </section>

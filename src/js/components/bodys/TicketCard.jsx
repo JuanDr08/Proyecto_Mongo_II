@@ -41,7 +41,7 @@ export const TicketCard = ({ fechaFuncion, hora, sala, total, asientos, _id, pel
                             <div className="flex flex-col justify-between w-full gap-[20px]">
 
                                 <TicketDesc title='Date' content={fechaFuncion} title2='Time' content2={hora} />
-                                <TicketDesc title='Cinema Hall #' content={sala} title2='Seat/s' content2={asientos.join(', ')} />
+                                <TicketDesc truncate={false} title='Cinema Hall #' content={sala} title2='Seat/s' content2={asientos.join(', ')} />
                                 <TicketDesc title='Cost' content={`$ ${total}`} title2='Order ID' content2={_id} />
                             </div>
                         </section>

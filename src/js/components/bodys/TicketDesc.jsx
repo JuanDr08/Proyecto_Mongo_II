@@ -1,6 +1,6 @@
 
 
-export const TicketDesc = ({ title, content, title2, content2 }) => {
+export const TicketDesc = ({ truncate=true,title, content, title2, content2 }) => {
 
     return (
         <section className="flex justify-between w-full">
@@ -10,7 +10,7 @@ export const TicketDesc = ({ title, content, title2, content2 }) => {
             </div>
             <div  className="w-[25%] flex flex-col gap-[10px]">
                 <p className="text-[#0007]"><small><strong>{title2}</strong></small></p>
-                <p className=" truncate "><strong>{content2}</strong></p>
+                <p className={`${truncate ? 'truncate' : ''}`}><strong>{content2}</strong></p>
             </div>
         </section>
     )
