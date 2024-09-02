@@ -56,7 +56,6 @@ export const SeatReservationScreen = () => {
     }
 
     const comprar = async () => {
-        console.log(uri.total)
         await fetch(`http://localhost:3000/ticket/${parametros.seatId}`, {
             method: 'POST',
             headers: {

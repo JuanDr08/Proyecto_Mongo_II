@@ -4,6 +4,7 @@ import { SeatsSelection } from './pages/SeatsSelectionComponent.jsx'
 import { SeatReservationScreen, loadSeatReserved } from './pages/SeatReservationComponent.jsx'
 import { TicketComponent, loader } from './pages/TicketComponent.jsx'
 import { UserTickets, loader as ticketLoader } from './pages/UserTicketsComponent.jsx'
+import { AllCurrentMovies, currentMoviesLoader } from './pages/SeeAllCurrentMoviesComponent.jsx'
 import {
     createBrowserRouter,
     RouterProvider
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
         path: '/tickets',
         element: <UserTickets/>,
         loader: ticketLoader
+    },
+    {
+        path: '/current',
+        element: <AllCurrentMovies/>,
+        loader: currentMoviesLoader
     }
 ])
 

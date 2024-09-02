@@ -4,7 +4,7 @@ import { FooterNavBar } from '../footers/PrincipalFooter.jsx'
 import { NavBar } from '../headers/NavBar.jsx'
 // hooks
 import { useEffect, useRef, useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 
 export async function moviesLoader () {
     let data = await fetch('http://localhost:3000/movies', {cache: "force-cache"}).then(res => res.json())
@@ -50,7 +50,7 @@ export const HomeComponent = () => {
             <main className='w-full'>
                 <section className='flex text-xl justify-between p-[20px]'>
                     <strong>Now playing</strong>
-                    <a href="/" className='text-red-500'>See all</a>
+                    <Link to={'/current'} className='text-rojoFuerte'>See all</Link>
                 </section>
 
                 <div className='my-[10px] flex max-w-full overflow-x-hidden relative'>
