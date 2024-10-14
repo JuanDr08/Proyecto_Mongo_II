@@ -26,7 +26,7 @@ module.exports = class Connection {
     }
 
     async #connect () {
-        this.conexion = new MongoClient(`${this.host}${this.user}:${this.pass}@${this.cluster}:${this.port}/cineCampus`);
+        this.conexion = new MongoClient(`${this.host}${this.user}:${this.pass}@${this.cluster}/cineCampus`);
         await this.conexion.connect();
     }
 

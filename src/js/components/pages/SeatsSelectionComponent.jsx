@@ -16,7 +16,7 @@ const DAYS = {
     '5': 'Viernes',
     '6': 'Sábado'
 }
-
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 export const SeatsSelection = () => {
 
     const navigate = useNavigate()
@@ -80,9 +80,9 @@ export const SeatsSelection = () => {
     }, [funcion])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/movie/${id}/functions`)
+        fetch(`${URL}/movie/${id}/functions`)
             .then(res => res.json()).then(data => setFuncion(data.msg))
-        fetch(`http://localhost:3000/user/${import.meta.env.VITE_PASSWORD}`)
+        fetch(`${URL}/user/${import.meta.env.VITE_PASSWORD}`)
             .then(res => res.json()).then(data => setUser(data.msg))
     }, [])
 
@@ -231,7 +231,7 @@ export const SeatsSelection = () => {
         }
         let encode = encodeURIComponent(JSON.stringify(obj))
 
-        fetch(`http://localhost:3000/movie/${funcionId}/seat`, {
+        fetch(`${URL}/movie/${funcionId}/seat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

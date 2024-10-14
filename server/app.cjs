@@ -15,12 +15,10 @@ app.use((req, res) => { // Dado el caso que en nuestra aplicacion nunca se llegu
     res.status(404).json({ message: "No tiene autorizacion" })
 })
 
-let config = { // definimos las configuraciones del link http
-    host: process.env.VITE_HOST,
-    port: process.env.EXPRESS_PORT_BACKEND
-}
 
-app.listen(config, () => { // Declaramos una escucha de conexiones a la direccion que especificamos
-    console.log(`http://${config.host}:${config.port}`)
+const port = process.env.PORT || 10000
+
+app.listen(port, () => { // Declaramos una escucha de conexiones a la direccion que especificamos
+    console.log(`App listening on port ${port}`)
 })
 

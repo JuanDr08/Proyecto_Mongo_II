@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react"
 
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 
 export const HoursCard = ({id, hora, setSelected, sala}) => {
 
@@ -14,7 +15,7 @@ export const HoursCard = ({id, hora, setSelected, sala}) => {
 
     useEffect(()=>{
         
-        fetch(`http://localhost:3000/room/${sala}`)
+        fetch(`${URL}/room/${sala}`)
             .then(res => res.json())
             .then(({data}) => setSalaInfo((data)))
         

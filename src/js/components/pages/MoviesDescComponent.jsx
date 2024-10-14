@@ -4,10 +4,10 @@ import { CinemaCards } from '../bodys/CinemaCards.jsx'
 import { ButtomFooter } from "../footers/ButtomFooter.jsx"
 import { useState } from "react"
 import { Link, useLoaderData } from "react-router-dom"
-
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 export async function movieLoader ({params}) {
 
-    const data = await fetch(`http://localhost:3000/movie/${params.id}`)
+    const data = await fetch(`${URL}/movie/${params.id}`)
     
     return data
 

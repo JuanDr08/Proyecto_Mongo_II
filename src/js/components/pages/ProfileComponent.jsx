@@ -1,9 +1,9 @@
 import { useLoaderData } from "react-router-dom"
 import { SectionIndicator } from "../headers/SectionIndicator"
-
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 export const userLoader = async () => {
 
-    let { msg } = await fetch(`http://localhost:3000/user/${import.meta.env.VITE_PASSWORD}`).then(res => res.json())
+    let { msg } = await fetch(`${URL}/user/${import.meta.env.VITE_PASSWORD}`).then(res => res.json())
 
     return msg
 

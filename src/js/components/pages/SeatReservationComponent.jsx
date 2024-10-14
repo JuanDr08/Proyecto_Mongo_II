@@ -6,11 +6,11 @@ import { ButtomFooter } from "../footers/ButtomFooter"
 import { OrderHeader } from "../bodys/OrderHeader"
 import { OrderDesc } from "../bodys/OrderDesc"
 import { useEffect, useState } from "react"
-
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 export const loadSeatReserved = async ({ params }) => {
 
     let uri = JSON.parse(decodeURIComponent(params.info))
-    const { data } = await fetch(`http://localhost:3000/movie/${params.id}`, { cache: "force-cache" }).then(res => res.json())
+    const { data } = await fetch(`${URL}/movie/${params.id}`, { cache: "force-cache" }).then(res => res.json())
 
     return { uri, data }
 
@@ -46,7 +46,7 @@ export const SeatReservationScreen = () => {
     let userVip = checkForVipUser(uri.user)
 
     const onFinalizar = async () => {
-        await fetch(`http://localhost:3000/ticket/${parametros.seatId}`, {method: 'DELETE'})
+        await fetch(`${URL}/ticket/${parametros.seatId}`, {method: 'DELETE'})
         Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -56,7 +56,7 @@ export const SeatReservationScreen = () => {
     }
 
     const comprar = async () => {
-        await fetch(`http://localhost:3000/ticket/${parametros.seatId}`, {
+        await fetch(`${URL}/ticket/${parametros.seatId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

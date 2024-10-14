@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom"
 import { SectionIndicator } from "../headers/SectionIndicator"
 import { TicketCard } from "../bodys/TicketCard"
-
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 export const loader = async () => {
 
-    const data = await fetch(`http://localhost:3000/user/${Number(import.meta.env.VITE_PASSWORD)}/tickets`).then(res => res.json())
+    const data = await fetch(`${URL}/user/${Number(import.meta.env.VITE_PASSWORD)}/tickets`).then(res => res.json())
 
     return data
 

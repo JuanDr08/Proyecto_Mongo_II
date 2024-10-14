@@ -14,9 +14,9 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/scrollbar'
 import 'swiper/css/pagination'
-
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 export async function moviesLoader() {
-    let data = await fetch('http://localhost:3000/movies', { cache: "force-cache" }).then(res => res.json())
+    let data = await fetch(`${URL}/movies`, { cache: "force-cache" }).then(res => res.json())
 
     let prox = data.data.filter(mov => mov.estado == 'proximamente')
     data = data.data.filter(mov => mov.estado == 'en cartelera' || mov.estado == 'estreno')

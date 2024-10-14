@@ -38,7 +38,7 @@
     PORT="27018"
     DB_NAME="cineCampus"
     
-    EXPRESS_PORT_BACKEND=3000
+    PORT=3000
     VITE_PORT_FRONTEND=5173
     VITE_HOST="localhost"
     ```

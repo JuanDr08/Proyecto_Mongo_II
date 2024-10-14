@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { TicketDesc } from "./TicketDesc"
-
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 export const TicketCard = ({ fechaFuncion, hora, sala, total, asientos, _id, pelicula }) => {
 
     const [movie, setMovie] = useState(null)
 
     useEffect(() => {
 
-        fetch(`http://localhost:3000/movie/${pelicula}`).then(res => res.json()).then(({ data }) => {
+        fetch(`${URL}/movie/${pelicula}`).then(res => res.json()).then(({ data }) => {
             setMovie({ img: data.poster, title: data.titulo })
         })
 

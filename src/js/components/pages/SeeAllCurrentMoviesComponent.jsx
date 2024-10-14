@@ -1,9 +1,9 @@
 import { useLoaderData } from "react-router-dom"
 import { SectionIndicator } from "../headers/SectionIndicator"
 import { CardsCarrusel } from "../bodys/CardsCarrusel"
-
+const URL = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000"
 export async function currentMoviesLoader () {
-    let data = await fetch('http://localhost:3000/movies', {cache: "force-cache"}).then(res => res.json())
+    let data = await fetch(`${URL}/movies`, {cache: "force-cache"}).then(res => res.json())
     data = data.data.filter(mov => mov.estado == 'en cartelera' || mov.estado == 'estreno')
     return data
 }
