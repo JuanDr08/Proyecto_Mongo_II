@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "init": "concurrently \"npm run dev\" \"npm start\"",
     "start": "node --watch --env-file .env ./server/app.cjs",
     "build": "vite build",
     "lint": "eslint .",
